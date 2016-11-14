@@ -7,6 +7,7 @@ class Planet
   int size;
   float speed;
   boolean mouseOver;
+  float scaleValue;
   
   Planet(String name, int distance, float speed)
   {
@@ -28,14 +29,22 @@ class Planet
   
   void render()
   {
+    scale(scaleValue);
     stroke(c_green);
+    strokeWeight(1);
     noFill();
     ellipse(centreX, centreY, distance*2, distance*2);  // Draw orbit
     if (mouseOver)
     {
       fill(c_green);
     }
+    strokeWeight(3);
     ellipse(x, y, size, size);  // Draw planet
+    
+    // Draw text
+    fill(255);
+    textAlign(LEFT, CENTER);
+    text(name, x + size, y);
   }
   
   void update()

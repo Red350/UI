@@ -3,6 +3,7 @@
 */
 
 int centreX, centreY;
+float scaleValue;
 
 ArrayList<Planet> planets;
 
@@ -12,11 +13,17 @@ void setup()
 {
   size(1200, 800);
   
-  centreX = width/2;
+  // Centre of the planet system
+  centreX = width/3*2;
   centreY = height/2;
   
+  scaleValue = 1;
+  
+  Planet p;
   planets = new ArrayList<Planet>();
-  Planet p = new Planet("Tatooine", 200, 0.01);
+  p = new Planet("Tatooine", 200, 0.01);
+  planets.add(p);
+  p = new Planet("Alderaan", 300, 0.001);
   planets.add(p);
 }
 
@@ -27,6 +34,7 @@ void draw()
   mouseOver();
 }
  
+// Calls mouseOver function for each planet
 void mouseOver()
 {
   for (Planet p: planets)
