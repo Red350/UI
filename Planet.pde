@@ -58,12 +58,25 @@ class Planet
     {
       offset = 0;
     }
+    
     ellipse(centreX, centreY, largeSize, largeSize);
+    arc(centreX, centreY, largeSize-offset, largeSize, HALF_PI, PI + HALF_PI);
     for (int i = 0; i < largeSize; i+=100)
     {
+      // Draw left side of planet
       arc(centreX, centreY, i-offset, largeSize, HALF_PI, PI + HALF_PI);
-      arc(centreX, centreY, i+offset, largeSize, PI + HALF_PI, TWO_PI+HALF_PI);
+      // Draw right side of planet
+      if (i != 0 || offset != 0)
+      {
+        arc(centreX, centreY, i+offset, largeSize, PI + HALF_PI, TWO_PI+HALF_PI);
+      }
     }
+    
+    // Draw horizontal lines
+    //for (int i = 100; i < largeSize*2; i+=100)
+    //{
+    //  arc(centreX, centreY, largeSize, i, 0, PI);
+    //}
   }
   
   void update()
