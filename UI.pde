@@ -6,6 +6,8 @@ int centreX, centreY;
 
 ArrayList<Planet> planets;
 
+color c_green = #20C20E;
+
 void setup()
 {
   size(1200, 800);
@@ -22,11 +24,19 @@ void draw()
 {
   background(0);
   drawPlanets();
+  mouseOver();
+}
+ 
+void mouseOver()
+{
+  for (Planet p: planets)
+  {
+    p.mouseOver();
+  }
 }
 
 // Function to draw the array list of planets
 // Also updates the planets before they're drawn
-
 void drawPlanets()
 {
   for (Planet p: planets)

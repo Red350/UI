@@ -6,6 +6,7 @@ class Planet
   float theta;
   int size;
   float speed;
+  boolean mouseOver;
   
   Planet(String name, int distance, float speed)
   {
@@ -15,16 +16,26 @@ class Planet
     
     theta = 0;  // start all planets at the same angle
     size = 20;  // All planets currently represented as the same size
+    mouseOver = false;  // Check if the mouse is over the planet
     
     update();  // Call update once to set planet location
   }
   
+  void mouseOver()
+  {
+    mouseOver = dist(mouseX, mouseY, x, y) < size ? true : false;
+  }
+  
   void render()
   {
+    stroke(c_green);
     noFill();
-    stroke(#20C20E);
-    ellipse(x, y, size, size);
-    ellipse(centreX, centreY, distance*2, distance*2);
+    ellipse(centreX, centreY, distance*2, distance*2);  // Draw orbit
+    if (mouseOver)
+    {
+      fill(c_green);
+    }
+    ellipse(x, y, size, size);  // Draw planet
   }
   
   void update()
