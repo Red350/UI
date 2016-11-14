@@ -3,21 +3,23 @@
 */
 
 int centreX, centreY;
-float scaleValue;
+int state;
 
 ArrayList<Planet> planets;
 
-color c_green = #20C20E;
+color c_planet = color(0,255,0,50);
+color c_planet_text = color(255,255,255,50);
+
 
 void setup()
 {
   size(1200, 800);
   
   // Centre of the planet system
-  centreX = width/3*2;
+  centreX = width/2;
   centreY = height/2;
   
-  scaleValue = 1;
+  state = 2;  // Default planet view
   
   Planet p;
   planets = new ArrayList<Planet>();
@@ -30,8 +32,39 @@ void setup()
 void draw()
 {
   background(0);
-  drawPlanets();
-  mouseOver();
+  switch(state)
+  {
+    // Draw intro
+    case 0:
+      break;
+    
+    // Draw planet view
+    case 1:
+      drawPlanets();
+      mouseOver();
+      break;
+     
+    // Transition
+    case 2:
+      drawPlanets();
+      if(frameCount % 4 == 0)
+      {
+        c_planet -= 0x01000000;
+        c_planet_text -= 0x01000000;
+        if (c_planet >> 24 == 0)
+        {
+          state = 3;
+          c_planet += 0x32000000;
+          c_planet_text += 0x32000000;
+        }
+      }
+      break;
+    
+    // Single planet
+    case 3:
+      planets.get(0).renderLarge();
+      break;
+  }
 }
  
 // Calls mouseOver function for each planet
