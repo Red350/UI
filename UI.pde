@@ -6,10 +6,12 @@ int centreX, centreY;
 int state;
 
 ArrayList<Planet> planets;
+Planet clickedPlanet;
 
+// Colours
 color c_planet = color(0,255,0,50);
 color c_planet_text = color(255,255,255,50);
-
+color c_singleplanet = color(255,0,0,0);
 
 void setup()
 {
@@ -19,7 +21,7 @@ void setup()
   centreX = width/2;
   centreY = height/2;
   
-  state = 2;  // Default planet view
+  state = 1;  // Default planet view
   
   Planet p;
   planets = new ArrayList<Planet>();
@@ -44,13 +46,18 @@ void draw()
       mouseOver();
       break;
      
-    // Transition
+    // Transition from planet view to single planet
     case 2:
       drawPlanets();
+      clickedPlanet.renderLarge();
       if(frameCount % 4 == 0)
       {
+        // Fade out planet system
         c_planet -= 0x01000000;
         c_planet_text -= 0x01000000;
+        
+        // Fade in single planet
+        c_singleplanet += 0x01000000;
         if (c_planet >> 24 == 0)
         {
           state = 3;
@@ -62,7 +69,7 @@ void draw()
     
     // Single planet
     case 3:
-      planets.get(0).renderLarge();
+      clickedPlanet.renderLarge();
       break;
   }
 }
@@ -73,6 +80,21 @@ void mouseOver()
   for (Planet p: planets)
   {
     p.mouseOver();
+  }
+}
+
+// Checks if a planet has been clicked
+void mouseClicked()
+{
+  // Can use the fact that if the mouse is over a planet,
+  // the planet's mouseOver boolean will be set to true.
+  for (Planet p : planets)
+  {
+    if (p.mouseOver == true)
+    {
+      clickedPlanet = p;
+      state = 2;
+    }
   }
 }
 

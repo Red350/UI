@@ -49,7 +49,9 @@ class Planet
   // Render a planet on it's own
   void renderLarge()
   {
-    
+    noFill();
+    stroke(c_singleplanet);
+    ellipse(centreX, centreY, 500, 500);
   }
   
   void update()
