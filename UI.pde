@@ -11,7 +11,7 @@ Planet clickedPlanet;
 // Colours
 color c_planet = color(0,255,0,50);
 color c_planet_text = color(255,255,255,50);
-color c_singleplanet = color(255,0,0,0);
+color c_singleplanet = color(255,0,0,100);
 
 void setup()
 {
@@ -21,14 +21,15 @@ void setup()
   centreX = width/2;
   centreY = height/2;
   
-  state = 1;  // Default planet view
+  state = 3;  // Default planet view
   
   Planet p;
   planets = new ArrayList<Planet>();
   p = new Planet("Tatooine", 200, 0.01);
   planets.add(p);
-  p = new Planet("Alderaan", 300, 0.001);
+  p = new Planet("Alderaan", 300, 0.00);
   planets.add(p);
+  clickedPlanet = p;  // TODO: Remove this, debug purposes only
 }
 
 void draw()
@@ -92,6 +93,8 @@ void mouseClicked()
   {
     if (p.mouseOver == true)
     {
+      // Clear mouseOver flag to prevent it from being clicked again
+      p.mouseOver = false;
       clickedPlanet = p;
       state = 2;
     }
