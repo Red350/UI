@@ -11,17 +11,17 @@ Planet clickedPlanet;
 // Colours
 color c_planet = color(0,255,0,100);
 color c_planet_text = color(255,255,255,100);
-color c_singleplanet = color(255,0,0,200);
+color c_singleplanet = color(255,0,0,0);
 
 void setup()
 {
   size(1200, 800);
   
   // Centre of the planet system
-  centreX = width/2;
+  centreX = width*2/3;
   centreY = height/2;
   
-  state = 3;  // Default planet view
+  state = 1;  // Default planet view
   
   Planet p;
   planets = new ArrayList<Planet>();

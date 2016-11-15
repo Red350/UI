@@ -4,7 +4,7 @@ class Planet
   float x, y;
   int distance;
   float theta;
-  int size, largeSize;
+  int size, largeSize, fifthLs;
   float speed;
   boolean mouseOver;
   int offset = 0;
@@ -17,7 +17,8 @@ class Planet
     
     theta = 0;  // start all planets at the same angle
     size = 20;  // All planets currently represented as the same size
-    largeSize = 500;
+    largeSize = 700;
+    fifthLs = largeSize / 5; // This is used to calculate the horizontal lines on the large planet
     mouseOver = false;  // Check if the mouse is over the planet
     
     update();  // Call update once to set planet location
@@ -60,6 +61,8 @@ class Planet
       offset = 0;
     }
     
+    // Draw half ellipses that move across the planets surface
+    // to give the illusion of rotation
     ellipse(centreX, centreY, largeSize, largeSize);
     arc(centreX, centreY, largeSize-offset, largeSize, HALF_PI, PI + HALF_PI);
     for (int i = 0; i < largeSize; i+=100)
@@ -74,14 +77,15 @@ class Planet
     }
     
     // Draw horizontal lines
-    // 492 736 191
-    //curve(492, 191, 508, 195, 674, 195, 736, 191);
-    //curve(1,1, 463, 191, 736, 191, 100,100);
-    arc(centreX, centreY-largeSize/2, largeSize, 100, QUARTER_PI+radians(12), PI-QUARTER_PI-radians(12));
-    arc(centreX, centreY-largeSize/2+100, largeSize, 100, QUARTER_PI-radians(15), PI-QUARTER_PI+radians(15));
-    arc(centreX, centreY-largeSize/2+200, largeSize, 100, QUARTER_PI-radians(35), PI-QUARTER_PI+radians(35));
-    arc(centreX, centreY-largeSize/2+300, largeSize, 100, QUARTER_PI-radians(30), PI-QUARTER_PI+radians(35));
+    // Sadly could not figure out how to calculate exactly what kind of arcs should be drawn,
+    // so had to resort to trial and error.
+    arc(centreX, centreY-largeSize/2, largeSize, fifthLs, QUARTER_PI+radians(12), PI-QUARTER_PI-radians(12));
+    arc(centreX, centreY-largeSize/2+fifthLs, largeSize, fifthLs, QUARTER_PI-radians(15), PI-QUARTER_PI+radians(15));
+    arc(centreX, centreY-largeSize/2+fifthLs*2, largeSize, fifthLs, QUARTER_PI-radians(35), PI-QUARTER_PI+radians(35));
+    arc(centreX, centreY-largeSize/2+fifthLs*3, largeSize, fifthLs, QUARTER_PI-radians(30), PI-QUARTER_PI+radians(30));
+    arc(centreX, centreY-largeSize/2+fifthLs*4, largeSize, fifthLs, QUARTER_PI+radians(4), PI-QUARTER_PI-radians(4));
   }
+  
   
   void update()
   {
