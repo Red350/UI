@@ -54,7 +54,7 @@ class Planet
   {
     noFill();
     stroke(c_singleplanet.c);
-    strokeWeight(3);
+    strokeWeight(2);
     offset++;
     if (offset == 100)
     {

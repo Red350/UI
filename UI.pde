@@ -30,7 +30,7 @@ void setup()
   
   state = 2;  // Default planet view
   
-  fadeSpeed = 2;  // Must be greater than 0, larger values means slower fading
+  fadeSpeed = 1;  // Must be greater than 0, larger values means slower fading
   
   // Initialise planets
   Planet p;
@@ -41,9 +41,9 @@ void setup()
   planets.add(p);
   
   // Initialise colours
-  c_intro = new ColorHandler(color(0,0,255,255));
-  c_system = new ColorHandler(color(0,255,0,100));
-  c_system_text = new ColorHandler(color(255,255,255,100));
+  c_intro = new ColorHandler(color(0,0,255,0));
+  c_system = new ColorHandler(color(0,255,0,255));
+  c_system_text = new ColorHandler(color(255,255,255,255));
   c_singleplanet = new ColorHandler(color(255,0,0,0));
   fadeIn = new ArrayList<ColorHandler>();
   fadeOut = new ArrayList<ColorHandler>();
@@ -52,7 +52,8 @@ void setup()
 void draw()
 {
   background(0);
-  text("x: "+mouseX+" y: "+mouseY, 10, 15);
+  fill(255);
+  text("x: "+mouseX+" y: "+mouseY+ " fps: " + frameRate, 10, 15);
   switch(state)
   {
     // Draw intro
@@ -72,7 +73,10 @@ void draw()
       clickedPlanet.renderLarge();
       if(frameCount % fadeSpeed == 0)
       {
-        fade();
+        if(fade(1) == true)
+        {
+          state = 4;
+        }
         ////Fade out planet system
         //c_system -= 0x01000000;
         //c_system_text -= 0x01000000;
@@ -97,17 +101,18 @@ void draw()
 
 // Fades colours in or out depending on the
 // contents of the two global colour array lists
-int fade()
+boolean fade(int fadeAmt)
 {
+  boolean finished = false;
   for (ColorHandler c : fadeIn)
   {
-    c.fadeIn(1);
+    c.fadeIn(fadeAmt);
   }
   for (ColorHandler c: fadeOut)
   {
-    c.fadeOut(1);
+    finished = c.fadeOut(fadeAmt);
   }
-  return 0;
+  return finished;
 }
  
 // Calls mouseOver function for each planet
@@ -135,7 +140,7 @@ void mouseClicked()
       state = 3;
       // add colours to their respective fade arrays
       // In this case we are fading out the system and fading in large planet
-      fadeIn.add(c_system);
+      fadeOut.add(c_system);
       fadeOut.add(c_system_text);
       fadeIn.add(c_singleplanet);
     }
