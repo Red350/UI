@@ -5,6 +5,7 @@
 int centreX, centreY;
 int state;
 int fadeSpeed;
+int fadeVariable;
 
 ArrayList<Planet> planets;
 Planet clickedPlanet;
@@ -30,7 +31,8 @@ void setup()
   
   state = 2;  // Default planet view
   
-  fadeSpeed = 1;  // Must be greater than 0, larger values means slower fading
+  fadeSpeed = 20;  // Speed at which screens fade, higher values are slower
+  fadeVariable = fadeSpeed;
   
   // Initialise planets
   Planet p;
@@ -71,24 +73,9 @@ void draw()
     case 3:
       drawPlanets();
       clickedPlanet.renderLarge();
-      if(frameCount % fadeSpeed == 0)
+      if (fade())
       {
-        if(fade(1) == true)
-        {
-          state = 4;
-        }
-        ////Fade out planet system
-        //c_system -= 0x01000000;
-        //c_system_text -= 0x01000000;
-        
-        //// Fade in single planet
-        //c_singleplanet += 0x01000000;
-        //if (c_system >> 24 == 0)
-        //{
-        //  state = 3;
-        //  c_system += 0x32000000;
-        //  c_system_text += 0x32000000;
-        //}
+        state = 4;
       }
       break;
     
@@ -101,18 +88,26 @@ void draw()
 
 // Fades colours in or out depending on the
 // contents of the two global colour array lists
-boolean fade(int fadeAmt)
+boolean fade()
 {
-  boolean finished = false;
-  for (ColorHandler c : fadeIn)
+  if (fadeVariable > 0)
   {
-    c.fadeIn(fadeAmt);
+    // fade colours
+    for(ColorHandler c : fadeOut)
+    {
+      c.setAlpha((int)map(fadeVariable,0,fadeSpeed,0,255));
+    }
+    for(ColorHandler c : fadeIn)
+    {
+      c.setAlpha((int)map(fadeVariable,0,fadeSpeed,255,0));
+    }
+    fadeVariable--;
+    return false;
   }
-  for (ColorHandler c: fadeOut)
+  else
   {
-    finished = c.fadeOut(fadeAmt);
+    return true;
   }
-  return finished;
 }
  
 // Calls mouseOver function for each planet
@@ -143,6 +138,7 @@ void mouseClicked()
       fadeOut.add(c_system);
       fadeOut.add(c_system_text);
       fadeIn.add(c_singleplanet);
+      fadeVariable = fadeSpeed;
     }
   }
 }

@@ -10,7 +10,13 @@ class ColorHandler
   ColorHandler(color c)
   {
     this.c = c;
-  }  
+  }
+  
+  void setAlpha(int a)
+  {
+    c &= 0x00FFFFFF;
+    c |= a << 24;
+  }
   
   /* At the moment, setting n to anything that doesn't divide evenly into 255 
      will cause the fade methods to fail, as the values are stored as signed
