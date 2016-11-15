@@ -53,6 +53,7 @@ class Planet
   {
     noFill();
     stroke(c_singleplanet);
+    strokeWeight(3);
     offset++;
     if (offset == 100)
     {
@@ -73,10 +74,13 @@ class Planet
     }
     
     // Draw horizontal lines
-    //for (int i = 100; i < largeSize*2; i+=100)
-    //{
-    //  arc(centreX, centreY, largeSize, i, 0, PI);
-    //}
+    // 492 736 191
+    //curve(492, 191, 508, 195, 674, 195, 736, 191);
+    //curve(1,1, 463, 191, 736, 191, 100,100);
+    arc(centreX, centreY-largeSize/2, largeSize, 100, QUARTER_PI+radians(12), PI-QUARTER_PI-radians(12));
+    arc(centreX, centreY-largeSize/2+100, largeSize, 100, QUARTER_PI-radians(15), PI-QUARTER_PI+radians(15));
+    arc(centreX, centreY-largeSize/2+200, largeSize, 100, QUARTER_PI-radians(35), PI-QUARTER_PI+radians(35));
+    arc(centreX, centreY-largeSize/2+300, largeSize, 100, QUARTER_PI-radians(30), PI-QUARTER_PI+radians(35));
   }
   
   void update()

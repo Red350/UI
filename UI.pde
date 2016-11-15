@@ -9,9 +9,9 @@ ArrayList<Planet> planets;
 Planet clickedPlanet;
 
 // Colours
-color c_planet = color(0,255,0,50);
-color c_planet_text = color(255,255,255,50);
-color c_singleplanet = color(255,0,0,100);
+color c_planet = color(0,255,0,100);
+color c_planet_text = color(255,255,255,100);
+color c_singleplanet = color(255,0,0,200);
 
 void setup()
 {
@@ -35,6 +35,7 @@ void setup()
 void draw()
 {
   background(0);
+  text("x: "+mouseX+" y: "+mouseY, 10, 15);
   switch(state)
   {
     // Draw intro
