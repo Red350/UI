@@ -32,19 +32,19 @@ class Planet
   // Render as part of the system
   void render()
   {
-    stroke(c_planet);
+    stroke(c_system.c);
     strokeWeight(1);
     noFill();
     ellipse(centreX, centreY, distance*2, distance*2);  // Draw orbit
     if (mouseOver)
     {
-      fill(c_planet);
+      fill(c_system.c);
     }
     strokeWeight(3);
     ellipse(x, y, size, size);  // Draw planet
     
     // Draw text
-    fill(c_planet_text);
+    fill(c_system_text.c);
     textAlign(LEFT, CENTER);
     text(name, x + size, y);
   }
@@ -53,7 +53,7 @@ class Planet
   void renderLarge()
   {
     noFill();
-    stroke(c_singleplanet);
+    stroke(c_singleplanet.c);
     strokeWeight(3);
     offset++;
     if (offset == 100)

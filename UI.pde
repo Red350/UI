@@ -10,15 +10,15 @@ ArrayList<Planet> planets;
 Planet clickedPlanet;
 
 // Colours
-color c_intro;
-color c_planet;
-color c_planet_text;
-color c_singleplanet;
+ColorHandler c_intro;
+ColorHandler c_system;
+ColorHandler c_system_text;
+ColorHandler c_singleplanet;
 
 // Array lists for storing colors
 // Colors are just integers in processing
-ArrayList<Integer> fadeIn;
-ArrayList<Integer> fadeOut;
+ArrayList<ColorHandler> fadeIn;
+ArrayList<ColorHandler> fadeOut;
 
 void setup()
 {
@@ -41,12 +41,12 @@ void setup()
   planets.add(p);
   
   // Initialise colours
-  c_intro = color(0,0,255,255);
-  c_planet = color(0,255,0,100);
-  c_planet_text = color(255,255,255,100);
-  c_singleplanet = color(255,0,0,0);
-  fadeIn = new ArrayList<Integer>();
-  fadeOut = new ArrayList<Integer>();
+  c_intro = new ColorHandler(color(0,0,255,255));
+  c_system = new ColorHandler(color(0,255,0,100));
+  c_system_text = new ColorHandler(color(255,255,255,100));
+  c_singleplanet = new ColorHandler(color(255,0,0,0));
+  fadeIn = new ArrayList<ColorHandler>();
+  fadeOut = new ArrayList<ColorHandler>();
 }
 
 void draw()
@@ -73,18 +73,18 @@ void draw()
       if(frameCount % fadeSpeed == 0)
       {
         fade();
-        //Fade out planet system
-        c_planet -= 0x01000000;
-        c_planet_text -= 0x01000000;
+        ////Fade out planet system
+        //c_system -= 0x01000000;
+        //c_system_text -= 0x01000000;
         
-        // Fade in single planet
-        c_singleplanet += 0x01000000;
-        if (c_planet >> 24 == 0)
-        {
-          state = 3;
-          c_planet += 0x32000000;
-          c_planet_text += 0x32000000;
-        }
+        //// Fade in single planet
+        //c_singleplanet += 0x01000000;
+        //if (c_system >> 24 == 0)
+        //{
+        //  state = 3;
+        //  c_system += 0x32000000;
+        //  c_system_text += 0x32000000;
+        //}
       }
       break;
     
@@ -99,6 +99,14 @@ void draw()
 // contents of the two global colour array lists
 int fade()
 {
+  for (ColorHandler c : fadeIn)
+  {
+    c.fadeIn(1);
+  }
+  for (ColorHandler c: fadeOut)
+  {
+    c.fadeOut(1);
+  }
   return 0;
 }
  
@@ -126,6 +134,10 @@ void mouseClicked()
       clickedPlanet = p;
       state = 3;
       // add colours to their respective fade arrays
+      // In this case we are fading out the system and fading in large planet
+      fadeIn.add(c_system);
+      fadeOut.add(c_system_text);
+      fadeIn.add(c_singleplanet);
     }
   }
 }
