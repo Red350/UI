@@ -9,6 +9,7 @@ class Planet
   boolean mouseOver;
   int offset = 0;
   boolean purge = false;
+  float purgeX, purgeY;
   
   Planet(String name, int distance, float speed)
   {
@@ -41,13 +42,21 @@ class Planet
     {
       fill(c_system.c);
     }
-    strokeWeight(3);
-    ellipse(x, y, size, size);  // Draw planet
     
-    // Draw text
-    fill(c_system_text.c);
-    textAlign(LEFT, CENTER);
-    text(name, x + size, y);
+    // Draw either a planet or an X where the planet was purged
+    if (!purge)
+    {
+      strokeWeight(3);
+      ellipse(x, y, size, size);  // Draw planet
+      
+      // Draw text
+      fill(c_system_text.c);
+      textAlign(LEFT, CENTER);
+      text(name, x + size, y);
+    } else {
+      line(purgeX+size/2, purgeY+size/2, purgeX-size/2, purgeY-size/2);
+      line(purgeX+size/2, purgeY-size/2, purgeX-size/2, purgeY+size/2);
+    } 
   }
   
   // Render a planet on it's own
@@ -55,38 +64,47 @@ class Planet
   {
     noFill();
     stroke(c_singleplanet.c);
-    strokeWeight(2);
-    offset++;
-    if (offset == 100)
+    if (!purge)
     {
-      offset = 0;
-    }
-    
-    // Draw half ellipses that move across the planets surface
-    // to give the illusion of rotation
-    ellipse(centreX, centreY, largeSize, largeSize);
-    arc(centreX, centreY, largeSize-offset, largeSize, HALF_PI, PI + HALF_PI);
-    for (int i = 0; i < largeSize; i+=100)
-    {
-      // Draw left side of planet
-      arc(centreX, centreY, i-offset, largeSize, HALF_PI, PI + HALF_PI);
-      // Draw right side of planet
-      if (i != 0 || offset != 0)
+      strokeWeight(2);
+      offset++;
+      if (offset == 100)
       {
-        arc(centreX, centreY, i+offset, largeSize, PI + HALF_PI, TWO_PI+HALF_PI);
+        offset = 0;
       }
+      
+      // Draw half ellipses that move across the planets surface
+      // to give the illusion of rotation
+      ellipse(centreX, centreY, largeSize, largeSize);
+      arc(centreX, centreY, largeSize-offset, largeSize, HALF_PI, PI + HALF_PI);
+      for (int i = 0; i < largeSize; i+=100)
+      {
+        // Draw left side of planet
+        arc(centreX, centreY, i-offset, largeSize, HALF_PI, PI + HALF_PI);
+        // Draw right side of planet
+        if (i != 0 || offset != 0)
+        {
+          arc(centreX, centreY, i+offset, largeSize, PI + HALF_PI, TWO_PI+HALF_PI);
+        }
+      }
+      
+      // Draw horizontal lines
+      // Sadly could not figure out how to calculate exactly what kind of arcs should be drawn,
+      // so had to resort to trial and error.
+      arc(centreX, centreY-largeSize/2, largeSize, fifthLs, QUARTER_PI+radians(12), PI-QUARTER_PI-radians(12));
+      arc(centreX, centreY-largeSize/2+fifthLs, largeSize, fifthLs, QUARTER_PI-radians(15), PI-QUARTER_PI+radians(15));
+      arc(centreX, centreY-largeSize/2+fifthLs*2, largeSize, fifthLs, QUARTER_PI-radians(35), PI-QUARTER_PI+radians(35));
+      arc(centreX, centreY-largeSize/2+fifthLs*3, largeSize, fifthLs, QUARTER_PI-radians(30), PI-QUARTER_PI+radians(30));
+      arc(centreX, centreY-largeSize/2+fifthLs*4, largeSize, fifthLs, QUARTER_PI+radians(4), PI-QUARTER_PI-radians(4));
     }
-    
-    // Draw horizontal lines
-    // Sadly could not figure out how to calculate exactly what kind of arcs should be drawn,
-    // so had to resort to trial and error.
-    arc(centreX, centreY-largeSize/2, largeSize, fifthLs, QUARTER_PI+radians(12), PI-QUARTER_PI-radians(12));
-    arc(centreX, centreY-largeSize/2+fifthLs, largeSize, fifthLs, QUARTER_PI-radians(15), PI-QUARTER_PI+radians(15));
-    arc(centreX, centreY-largeSize/2+fifthLs*2, largeSize, fifthLs, QUARTER_PI-radians(35), PI-QUARTER_PI+radians(35));
-    arc(centreX, centreY-largeSize/2+fifthLs*3, largeSize, fifthLs, QUARTER_PI-radians(30), PI-QUARTER_PI+radians(30));
-    arc(centreX, centreY-largeSize/2+fifthLs*4, largeSize, fifthLs, QUARTER_PI+radians(4), PI-QUARTER_PI-radians(4));
   }
   
+  void purge()
+  {
+    purge = true;
+    purgeX = x;
+    purgeY = y;
+  }
   
   void update()
   {

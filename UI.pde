@@ -200,7 +200,7 @@ void mouseClicked()
     
     if(purgeButton.mouseOver)
     {
-      clickedPlanet.purge = true;
+      clickedPlanet.purge();
     }
   }
 }
