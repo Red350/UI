@@ -3,7 +3,7 @@
 */
 
 /* Constants */
-public static final int fadeSpeed = 90; // Number of frames over which a fade transition happens
+public static final int fadeSpeed = 30; // Number of frames over which a fade transition happens
 
 int centreX, centreY;
 int state;
@@ -21,6 +21,7 @@ Button purgeButton;
 // Colours that need to be faded are made using the ColorHandler class
 ColorHandler c_intro;
 ColorHandler c_system;
+ColorHandler c_system_purge;
 ColorHandler c_system_text;
 ColorHandler c_singleplanet;
 
@@ -46,7 +47,7 @@ void setup()
   planets = new ArrayList<Planet>();
   p = new Planet("Tatooine", 200, 0.01);
   planets.add(p);
-  p = new Planet("Alderaan", 300, 0.00);
+  p = new Planet("Alderaan", 300, 0.001);
   planets.add(p);
   
   // Initialise buttons
@@ -56,6 +57,7 @@ void setup()
   // Initialise colours
   c_intro = new ColorHandler(color(0,0,255,0));
   c_system = new ColorHandler(color(0,255,0,255));
+  c_system_purge = new ColorHandler(color(255,0,0));
   c_system_text = new ColorHandler(color(255,255,255,255));
   c_singleplanet = new ColorHandler(color(255,0,0,0));
   fadeIn = new ArrayList<ColorHandler>();
@@ -182,6 +184,7 @@ void mouseClicked()
         // In this case we are fading out the system and fading in large planet
         fadeOut.add(c_system);
         fadeOut.add(c_system_text);
+        fadeOut.add(c_system_purge);
         fadeIn.add(c_singleplanet);
         fadeVariable = fadeSpeed;
       }
@@ -194,6 +197,7 @@ void mouseClicked()
       state = 5;  // Transition from single planet to system view
       fadeIn.add(c_system);
       fadeIn.add(c_system_text);
+      fadeIn.add(c_system_purge);
       fadeOut.add(c_singleplanet);
       fadeVariable = fadeSpeed;
     }

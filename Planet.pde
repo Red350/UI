@@ -10,6 +10,7 @@ class Planet
   int offset = 0;
   boolean purge = false;
   float purgeX, purgeY;
+  float purgeArcLength = PI / 8;
   
   Planet(String name, int distance, float speed)
   {
@@ -54,18 +55,32 @@ class Planet
       textAlign(LEFT, CENTER);
       text(name, x + size, y);
     } else {
+      // Draw an X where the planet was purged
+      stroke(c_system_purge.c);
       line(purgeX+size/2, purgeY+size/2, purgeX-size/2, purgeY-size/2);
       line(purgeX+size/2, purgeY-size/2, purgeX-size/2, purgeY+size/2);
+      // Draw text
+      fill(c_system_text.c);
+      textAlign(LEFT, CENTER);
+      text(name, purgeX + size, purgeY);
+      
+      // Draw predicted position of where it would have been
+      stroke(c_system.c);
+      noFill();
+      for(float i = 0; i < TWO_PI; i += purgeArcLength)
+      {
+        arc(x, y, size, size, i, i+purgeArcLength/2);
+      }
     } 
   }
   
   // Render a planet on it's own
   void renderLarge()
   {
-    noFill();
-    stroke(c_singleplanet.c);
     if (!purge)
     {
+      noFill();
+      stroke(c_singleplanet.c);
       strokeWeight(2);
       offset++;
       if (offset == 100)
