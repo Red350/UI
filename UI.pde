@@ -4,15 +4,17 @@
 
 /* Constants */
 public static final int fadeSpeed = 30; // Number of frames over which a fade transition happens
+public static final int numDebris = 100;  // Number of debris objects after a purge
 
 int centreX, centreY;
 int state;
 int fadeVariable;
 boolean mouseLock = false;  // Prevents the mouse from being clicked during transitions
 
-// Planets
-ArrayList<Planet> planets;
+// Planets and debris
+ArrayList<Planet> planets;  
 Planet clickedPlanet;
+Debris purgeDebris[];
 
 // Buttons
 Button testButton;
@@ -105,6 +107,16 @@ void draw()
       testButton.render();
       purgeButton.update();
       purgeButton.render();
+      
+      // Draw debris
+      if (purgeDebris != null)
+      {
+        for (int i = 0; i < numDebris; i++)
+        {
+          purgeDebris[i].update();
+          purgeDebris[i].render();
+        }
+      }
       break;
       
     // Transition from single planet to system view
@@ -202,9 +214,20 @@ void mouseClicked()
       fadeVariable = fadeSpeed;
     }
     
+    // PURGE
     if(purgeButton.mouseOver)
     {
-      clickedPlanet.purge();
+      if(clickedPlanet.purge == false)
+      {
+        clickedPlanet.purge();
+        purgeDebris = new Debris[numDebris];
+        Debris d;
+        for(int i = 0; i < numDebris; i++)
+        {
+          d = new Debris(0,0,random(-10,+10),random(-10,+10),random(0,QUARTER_PI));
+          purgeDebris[i] = d;
+        }
+      }
     }
   }
 }
