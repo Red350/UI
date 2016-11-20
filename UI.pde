@@ -2,9 +2,11 @@
     Pádraig Redmond C15755659
 */
 
+/* Constants */
+public static final int fadeSpeed = 60; // Number of frames over which a fade transition happens
+
 int centreX, centreY;
 int state;
-int fadeSpeed;
 int fadeVariable;
 
 ArrayList<Planet> planets;
@@ -31,7 +33,6 @@ void setup()
   
   state = 2;  // Default planet view
   
-  fadeSpeed = 20;  // Speed at which screens fade, higher values are slower
   fadeVariable = fadeSpeed;
   
   // Initialise planets
@@ -66,7 +67,7 @@ void draw()
     // Draw planet view
     case 2:
       drawPlanets();
-      mouseOver();
+      mouseOver();  // Checks if the mouse is hovering over any planet
       break;
      
     // Transition from planet view to single planet
