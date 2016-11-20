@@ -8,6 +8,7 @@ class Planet
   float speed;
   boolean mouseOver;
   int offset = 0;
+  boolean purge = false;
   
   Planet(String name, int distance, float speed)
   {

@@ -16,6 +16,7 @@ Planet clickedPlanet;
 
 // Buttons
 Button testButton;
+Button purgeButton;
 
 // Colours that need to be faded are made using the ColorHandler class
 ColorHandler c_intro;
@@ -49,7 +50,8 @@ void setup()
   planets.add(p);
   
   // Initialise buttons
-  testButton = new Button(100,500, 100, 50, #00FFFF, "Test button");
+  testButton = new Button(100, 500, 100, 50, #00FFFF, "Test button");
+  purgeButton = new Button(width/6, height/2, 100, 50, #00FFFF, "DO NOT PRESS");
   
   // Initialise colours
   c_intro = new ColorHandler(color(0,0,255,0));
@@ -99,6 +101,8 @@ void draw()
       clickedPlanet.renderLarge();
       testButton.update();
       testButton.render();
+      purgeButton.update();
+      purgeButton.render();
       break;
       
     // Transition from single planet to system view
@@ -192,6 +196,11 @@ void mouseClicked()
       fadeIn.add(c_system_text);
       fadeOut.add(c_singleplanet);
       fadeVariable = fadeSpeed;
+    }
+    
+    if(purgeButton.mouseOver)
+    {
+      clickedPlanet.purge = true;
     }
   }
 }
