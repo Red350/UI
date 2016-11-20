@@ -12,7 +12,7 @@ int fadeVariable;
 ArrayList<Planet> planets;
 Planet clickedPlanet;
 
-// Colours
+// Colours that need to be faded are made using the ColorHandler class
 ColorHandler c_intro;
 ColorHandler c_system;
 ColorHandler c_system_text;
@@ -56,7 +56,10 @@ void draw()
 {
   background(0);
   fill(255);
+  // show mouse coordinates
   text("x: "+mouseX+" y: "+mouseY+ " fps: " + frameRate, 10, 15);
+  
+  drawPanel();  // Draw the user panel of the left side of the screen
   switch(state)
   {
     // Draw intro
@@ -85,6 +88,11 @@ void draw()
       clickedPlanet.renderLarge();
       break;
   }
+}
+
+void drawPanel()
+{
+  
 }
 
 // Fades colours in or out depending on the

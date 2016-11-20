@@ -12,15 +12,20 @@ class ColorHandler
     this.c = c;
   }
   
-  void setAlpha(int a)
+  // Set the alpha value of a colour
+  void setAlpha(int alpha)
   {
-    c &= 0x00FFFFFF;
-    c |= a << 24;
+    
+    c &= 0x00FFFFFF;  // Clears the first 2 bytes of the number
+    c |= alpha << 24;     // Sets the first 2 bytes to the value alpha 
   }
   
-  /* At the moment, setting n to anything that doesn't divide evenly into 255 
-     will cause the fade methods to fail, as the values are stored as signed
-     ints, and the check for overflow I was doing only works on unsigned
+  /* The methods below are currently unused.
+     The original idea was to let the class worry about when the color
+     had finished fading, but due to how bit operations work with signed
+     numbers, I found this to be very difficult to get working.
+     The current implementation uses two global variables to fade in and out.
+     
   */
   
   // Takes a value n and adds it to the alpha value of the colour
@@ -39,8 +44,6 @@ class ColorHandler
     if (abs(temp >> 24) < (c >> 24))
     {
       c |= 0xFF000000;
-      println("hello");
-      println("aslkdfjlskdfa\nsdfsdf\nsdgfsdf\nsdfsdf\n");
       return true;
     }
     else
@@ -68,11 +71,10 @@ class ColorHandler
     // In this case set c to the minimum alpha value and return 0
     int t1 = temp >> 24;
     int t2 = c >> 24;
-    //println("temp is " + Integer.toHexString(t1) + " \t colour is " + Integer.toHexString(t2));
+    println("temp is " + Integer.toHexString(t1) + " \t colour is " + Integer.toHexString(t2));
     if (temp >> 24 > abs(c >> 24))
     {
       c &= 0x00FFFFFF;
-      println("aslkdfjlskdfa\nsdfsdf\nsdgfsdf\nsdfsdf\n");
       return true;
     }
     else
