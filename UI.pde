@@ -3,14 +3,19 @@
 */
 
 /* Constants */
-public static final int fadeSpeed = 60; // Number of frames over which a fade transition happens
+public static final int fadeSpeed = 120; // Number of frames over which a fade transition happens
 
 int centreX, centreY;
 int state;
 int fadeVariable;
+boolean mouseLock = false;  // Prevents the mouse from being clicked during transitions
 
+// Planets
 ArrayList<Planet> planets;
 Planet clickedPlanet;
+
+// Buttons
+Button testButton;
 
 // Colours that need to be faded are made using the ColorHandler class
 ColorHandler c_intro;
@@ -43,6 +48,9 @@ void setup()
   p = new Planet("Alderaan", 300, 0.00);
   planets.add(p);
   
+  // Initialise buttons
+  testButton = new Button(100,500, 100, 50, #00FFFF, "Test button");
+  
   // Initialise colours
   c_intro = new ColorHandler(color(0,0,255,0));
   c_system = new ColorHandler(color(0,255,0,255));
@@ -57,9 +65,11 @@ void draw()
   background(0);
   fill(255);
   // show mouse coordinates
+  textAlign(LEFT, CENTER);
   text("x: "+mouseX+" y: "+mouseY+ " fps: " + frameRate, 10, 15);
   
   drawPanel();  // Draw the user panel of the left side of the screen
+  
   switch(state)
   {
     // Draw intro
@@ -73,13 +83,14 @@ void draw()
       mouseOver();  // Checks if the mouse is hovering over any planet
       break;
      
-    // Transition from planet view to single planet
+    // Transition from system view to single planet
     case 3:
       drawPlanets();
       clickedPlanet.renderLarge();
       if (fade())
       {
         state = 4;
+        mouseLock = false;
       }
       break;
     
@@ -87,12 +98,24 @@ void draw()
     case 4:
       clickedPlanet.renderLarge();
       break;
+      
+    // Transition from single planet to system view
+    case 5:
+      drawPlanets();
+      clickedPlanet.renderLarge();
+      if (fade())
+      {
+        state = 2;
+        mouseLock = false;
+      }
+      break;
   }
 }
 
 void drawPanel()
 {
-  
+  testButton.update();
+  testButton.render();
 }
 
 // Fades colours in or out depending on the
@@ -115,38 +138,57 @@ boolean fade()
   }
   else
   {
+    // Clear the fade arrays
+    fadeIn.clear();
+    fadeOut.clear();
     return true;
   }
 }
  
 // Calls mouseOver function for each planet
+// TODO: Make the planet mouseover function part of its update function
 void mouseOver()
 {
   for (Planet p: planets)
   {
     p.mouseOver();
   }
+  
 }
 
 // Checks if a planet has been clicked
 // If so change state to the transition between system and planet view
 void mouseClicked()
 {
-  // Can use the fact that if the mouse is over a planet,
-  // the planet's mouseOver boolean will be set to true.
-  for (Planet p : planets)
+  if(!mouseLock)
   {
-    if (p.mouseOver == true)
+    // Can use the fact that if the mouse is over a planet,
+    // the planet's mouseOver boolean will be set to true.
+    for (Planet p : planets)
     {
-      // Clear mouseOver flag to prevent it from being clicked again
-      p.mouseOver = false;
-      clickedPlanet = p;
-      state = 3;
-      // add colours to their respective fade arrays
-      // In this case we are fading out the system and fading in large planet
-      fadeOut.add(c_system);
-      fadeOut.add(c_system_text);
-      fadeIn.add(c_singleplanet);
+      if (p.mouseOver)
+      {
+        mouseLock = true;
+        // Clear mouseOver flag to prevent it from being clicked again
+        p.mouseOver = false;
+        clickedPlanet = p;
+        state = 3;
+        // add colours to their respective fade arrays
+        // In this case we are fading out the system and fading in large planet
+        fadeOut.add(c_system);
+        fadeOut.add(c_system_text);
+        fadeIn.add(c_singleplanet);
+        fadeVariable = fadeSpeed;
+      }
+    }
+    
+    if(testButton.mouseOver)
+    {
+      mouseLock = true;
+      state = 5;  // Transition from single planet to system view
+      fadeIn.add(c_system);
+      fadeIn.add(c_system_text);
+      fadeOut.add(c_singleplanet);
       fadeVariable = fadeSpeed;
     }
   }
