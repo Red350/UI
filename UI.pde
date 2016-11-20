@@ -3,7 +3,7 @@
 */
 
 /* Constants */
-public static final int fadeSpeed = 120; // Number of frames over which a fade transition happens
+public static final int fadeSpeed = 90; // Number of frames over which a fade transition happens
 
 int centreX, centreY;
 int state;
@@ -66,7 +66,7 @@ void draw()
   fill(255);
   // show mouse coordinates
   textAlign(LEFT, CENTER);
-  text("x: "+mouseX+" y: "+mouseY+ " fps: " + frameRate, 10, 15);
+  text(" State " + state + " x: "+mouseX+" y: "+mouseY+ " fps: " + frameRate, 10, 15);
   
   drawPanel();  // Draw the user panel of the left side of the screen
   
@@ -97,6 +97,8 @@ void draw()
     // Single planet
     case 4:
       clickedPlanet.renderLarge();
+      testButton.update();
+      testButton.render();
       break;
       
     // Transition from single planet to system view
@@ -114,8 +116,7 @@ void draw()
 
 void drawPanel()
 {
-  testButton.update();
-  testButton.render();
+  
 }
 
 // Fades colours in or out depending on the
@@ -184,6 +185,7 @@ void mouseClicked()
     
     if(testButton.mouseOver)
     {
+      testButton.mouseOver = false;  // Clear mouseOver flag to prevent it from being clicked again
       mouseLock = true;
       state = 5;  // Transition from single planet to system view
       fadeIn.add(c_system);
