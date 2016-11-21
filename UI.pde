@@ -19,6 +19,7 @@ Debris purgeDebris[];
 // Buttons
 Button testButton;
 Button purgeButton;
+Slider testSlider;
 
 // Colours that need to be faded are made using the ColorHandler class
 ColorHandler c_intro;
@@ -36,6 +37,7 @@ void setup()
 {
   size(1200, 800);
   frameRate(60);
+  rectMode(CENTER);
   
   // Centre of the planet system
   centreX = width*2/3;
@@ -56,6 +58,7 @@ void setup()
   // Initialise buttons
   testButton = new Button(100, 500, 100, 50, #00FFFF, "Test button");
   purgeButton = new Button(width/6, height/2, 100, 50, #00FFFF, "DO NOT PRESS");
+  testSlider = new Slider(150, 600, 200, 20);
   
   // Initialise colours
   c_intro = new ColorHandler(color(0,0,255,0));
@@ -136,7 +139,7 @@ void draw()
 
 void drawPanel()
 {
-  
+  testSlider.render();
 }
 
 // Fades colours in or out depending on the
