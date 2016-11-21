@@ -76,6 +76,7 @@ void draw()
   text(" State " + state + " x: "+mouseX+" y: "+mouseY+ " fps: " + frameRate, 10, 15);
   
   drawPanel();  // Draw the user panel of the left side of the screen
+  updatePlanets();  // Update the planets every frame, even when not displayed
   
   switch(state)
   {
@@ -242,13 +243,20 @@ void drawIntro()
   }
 }
 
-// Function to draw the array list of planets
-// Also updates the planets before they're drawn
-void drawPlanets()
+// Function to update the position of the planets in the system view
+void updatePlanets()
 {
   for (Planet p: planets)
   {
     p.update();
+  }
+}
+
+// Function to draw the planets in the system view
+void drawPlanets()
+{
+  for (Planet p: planets)
+  {
     p.render();
   }
 }
