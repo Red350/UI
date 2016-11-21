@@ -18,8 +18,18 @@ class Debris
   
   void update()
   {
+    // Update position and angle
     pos.add(velocity);
     theta += thetaDelta;
+    
+    // Fade colour for the last 60 frames of the debris' life
+    int temp;
+    if(aliveTime <= 60)
+    {
+      temp = (int)map(aliveTime, 60, 0, 255, 0);
+      c = color(temp,0,0);
+    }
+    
     aliveTime--;
   }
   
