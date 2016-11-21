@@ -35,6 +35,7 @@ ArrayList<ColorHandler> fadeOut;
 void setup()
 {
   size(1200, 800);
+  frameRate(60);
   
   // Centre of the planet system
   centreX = width*2/3;
@@ -224,7 +225,7 @@ void mouseClicked()
         Debris d;
         for(int i = 0; i < numDebris; i++)
         {
-          d = new Debris(0,0,random(-10,+10),random(-10,+10),random(0,QUARTER_PI));
+          d = new Debris(centreX,centreY,random(-10,+10),random(-10,+10),random(0,PI/32), (int)random(180,240));
           purgeDebris[i] = d;
         }
       }
