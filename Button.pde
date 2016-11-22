@@ -33,7 +33,7 @@ class Button
       fill(c);
       
     textAlign(CENTER, CENTER);
-    text(text, x, y);
+    text(text, x + w/2, y + h/2);
   }
   
   void update()

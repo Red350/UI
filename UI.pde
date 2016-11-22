@@ -37,7 +37,6 @@ void setup()
 {
   size(1200, 800);
   frameRate(60);
-  rectMode(CENTER);
   
   // Centre of the planet system
   centreX = width*2/3;

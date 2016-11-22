@@ -37,6 +37,7 @@ class Debris
   {
     if(aliveTime > 0)
     {
+      strokeWeight(2);
       stroke(c);
       pushMatrix();
       translate(pos.x, pos.y);
