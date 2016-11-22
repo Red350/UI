@@ -19,7 +19,6 @@ Debris purgeDebris[];
 // Buttons
 Button testButton;
 Button purgeButton;
-Slider testSlider;
 
 // Colours that need to be faded are made using the ColorHandler class
 ColorHandler c_intro;
@@ -33,6 +32,9 @@ ColorHandler c_singleplanet;
 ArrayList<ColorHandler> fadeIn;
 ArrayList<ColorHandler> fadeOut;
 
+// Intro text
+TypedText introText;
+
 void setup()
 {
   size(1200, 800);
@@ -42,7 +44,7 @@ void setup()
   centreX = width*2/3;
   centreY = height/2;
   
-  state = 2;  // Default planet view
+  state = 0;  // Default planet view
   
   fadeVariable = fadeSpeed;
   
@@ -57,7 +59,6 @@ void setup()
   // Initialise buttons
   testButton = new Button(100, 500, 100, 50, #00FFFF, "Test button");
   purgeButton = new Button(width/6, height/2, 100, 50, #00FFFF, "DO NOT PRESS");
-  testSlider = new Slider(150, 600, 200, 20);
   
   // Initialise colours
   c_intro = new ColorHandler(color(0,0,255,0));
@@ -67,6 +68,9 @@ void setup()
   c_singleplanet = new ColorHandler(color(255,0,0,0));
   fadeIn = new ArrayList<ColorHandler>();
   fadeOut = new ArrayList<ColorHandler>();
+  
+  // Initialise intro text
+  introText = new TypedText("Test string\nNext String\b\b\b\b\r20");
 }
 
 void draw()
@@ -75,6 +79,7 @@ void draw()
   fill(255);
   // show mouse coordinates
   textAlign(LEFT, CENTER);
+  textSize(12);
   text(" State " + state + " x: "+mouseX+" y: "+mouseY+ " fps: " + frameRate, 10, 15);
   
   drawPanel();  // Draw the user panel of the left side of the screen
@@ -138,7 +143,6 @@ void draw()
 
 void drawPanel()
 {
-  testSlider.render();
 }
 
 // Fades colours in or out depending on the
@@ -238,11 +242,13 @@ void mouseClicked()
 
 void drawIntro()
 {
-  ellipse(100,100,100,100);
-  if(frameCount==120)
-  {
-    state=1;
-  }
+  
+  introText.update();
+  textSize(30);
+  textAlign(LEFT,TOP);
+  text(introText.toString(), width/2, height/2);
+  stroke(255);
+  line(0,height/2,width,height/2);
 }
 
 // Function to update the position of the planets in the system view
