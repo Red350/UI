@@ -1,55 +1,69 @@
 class TypedText
 {
-  String finalString;
+  String inputString;
   String displayString;
-  int finalIndex = 0;
-  int displayIndex = 0;
-  int finalLength;
+  int i = 0;    // This is the index of the string being parsed
+  int displayIndex = 0;  // This is the index of the string to be displayed
+  int inputLength;
+  int idleTime;
+  char c;
   
-  TypedText(String finalString)
+  TypedText(String inputString)
   {
-    this.finalString = finalString;
-    finalLength = finalString.length();
+    this.inputString = inputString;
+    inputLength = inputString.length();
     displayString = "";
   }
   
-  // Adds another character to the display string
+  // Parse the input string
   void update()
   {
-    if (finalIndex < finalLength)
+    // Only parse the string if not if cursor not sitting idle
+    if (idleTime <= 0)
     {
-      if (frameCount % 5 == 0)
+      // Check to see if we've reached the end of the string
+      if (i < inputLength)
       {
-        if(finalString.charAt(finalIndex) == '\b')
+        c = inputString.charAt(i);
+        
+        // Check if we're at a carriage return character, which to us means start idle time
+        if(c == '\r')
         {
-          //displayString = displayString.substring(0,displayString.length()-1);
-          displayString = displayString.substring(0,displayIndex-1);
-          displayIndex--;
+          idleTime = Integer.parseInt(inputString.substring(i+1,i+3));
+          i+=3;
         }
         else
         {
-          displayString = displayString + finalString.charAt(finalIndex);
-          displayIndex++;
+          if (frameCount % 5 == 0)
+          {
+            if(inputString.charAt(i) == '\b')
+            {
+              displayString = displayString.substring(0,displayIndex-1);
+              displayIndex--;
+            }
+            else
+            {
+              displayString = displayString + inputString.charAt(i);
+              displayIndex++;
+            }
+            i++;
+          }
         }
-        finalIndex++;
-      }
+      } 
     }
     else
     {
       if(frameCount % 30 == 0)
       {
-        if(finalIndex == finalLength)
+        if(idleTime % 2 == 0)
         {
           displayString = displayString + "_";
-          finalIndex++;
-          displayIndex++;
         }
         else
         {
-          displayString = displayString.substring(0,displayIndex-1);
-          finalIndex--;
-          displayIndex--;
+          displayString = displayString.substring(0,displayString.length()-1);
         }
+        idleTime--;
       }
     }
   }
