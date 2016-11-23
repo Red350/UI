@@ -16,6 +16,7 @@ class SysViewButton extends Button
       fadeIn.add(c_system_text);
       fadeIn.add(c_system_purge);
       fadeOut.add(c_singleplanet);
+      fadeOut.add(c_debris);
       fadeOut.add(c_button);
       fadeVariable = fadeSpeed;
     }

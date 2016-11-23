@@ -17,7 +17,13 @@ class ColorHandler
   {
     
     c &= 0x00FFFFFF;  // Clears the first 2 bytes of the number
-    c |= alpha << 24;     // Sets the first 2 bytes to the value alpha 
+    c |= alpha << 24; // Sets the first 2 bytes to the value alpha 
+  }
+  
+  void setRed(int red)
+  {
+    c &= 0xFF00FFFF;  // Clears the first 2 bytes of the number
+    c |= red << 16;   // Sets the first 2 bytes to the value red
   }
   
   /* The methods below are currently unused.

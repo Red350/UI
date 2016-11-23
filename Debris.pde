@@ -6,7 +6,6 @@ class Debris
   float theta = 0;
   int size = 100;
   int aliveTime;
-  color c = c_singleplanet.c;
   
   Debris(float x, float y, float vx, float vy, float thetaDelta, int aliveTime)
   {
@@ -23,11 +22,9 @@ class Debris
     theta += thetaDelta;
     
     // Fade colour for the last 60 frames of the debris' life
-    int temp;
     if(aliveTime <= 60)
     {
-      temp = (int)map(aliveTime, 60, 0, 255, 0);
-      c = color(temp,0,0);
+      c_debris.setRed((int)map(aliveTime, 60, 0, 255, 0));
     }
     
     aliveTime--;
@@ -38,7 +35,7 @@ class Debris
     if(aliveTime > 0)
     {
       strokeWeight(2);
-      stroke(c);
+      stroke(c_debris.c);
       pushMatrix();
       translate(pos.x, pos.y);
       rotate(theta);

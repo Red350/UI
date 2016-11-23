@@ -27,6 +27,7 @@ ColorHandler c_system;
 ColorHandler c_system_purge;
 ColorHandler c_system_text;
 ColorHandler c_singleplanet;
+ColorHandler c_debris;
 ColorHandler c_button;
 
 // Array lists for storing colors
@@ -70,6 +71,7 @@ void setup()
   c_system_purge = new ColorHandler(color(255,0,0,0));
   c_system_text = new ColorHandler(color(255,255,255,0));
   c_singleplanet = new ColorHandler(color(255,0,0,0));
+  c_debris = new ColorHandler(color(255,0,0,0));
   c_button = new ColorHandler(color(0,255,255,0));
   fadeIn = new ArrayList<ColorHandler>();
   fadeOut = new ArrayList<ColorHandler>();
