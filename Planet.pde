@@ -38,6 +38,8 @@ class Planet
     stroke(c_system.c);
     strokeWeight(1);
     noFill();
+    textAlign(LEFT, CENTER);
+    textSize(12);
     ellipse(centreX, centreY, distance*2, distance*2);  // Draw orbit
     if (mouseOver)
     {
@@ -52,7 +54,6 @@ class Planet
       
       // Draw text
       fill(c_system_text.c);
-      textAlign(LEFT, CENTER);
       text(name, x + size, y);
     } else {
       // Draw an X where the planet was purged
@@ -61,7 +62,6 @@ class Planet
       line(purgeX+size/2, purgeY-size/2, purgeX-size/2, purgeY+size/2);
       // Draw text
       fill(c_system_text.c);
-      textAlign(LEFT, CENTER);
       text(name, purgeX + size, purgeY);
       
       // Draw predicted position of where it would have been

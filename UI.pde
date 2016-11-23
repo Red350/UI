@@ -9,6 +9,7 @@ public static final int numDebris = 100;  // Number of debris objects after a pu
 int centreX, centreY;
 int state;
 int fadeVariable;
+int introGap = 10;
 boolean mouseLock = false;  // Prevents the mouse from being clicked during transitions
 
 // Planets and debris
@@ -35,6 +36,7 @@ ArrayList<ColorHandler> fadeOut;
 // Intro text
 String fileInput[];
 StringParser introText;
+PFont introFont;
 
 void setup()
 {
@@ -58,7 +60,7 @@ void setup()
   planets.add(p);
   
   // Initialise buttons
-  testButton = new Button(100, 500, 100, 50, #00FFFF, "Test button");
+  testButton = new Button(100, 500, 100, 50, #00FFFF, "SYSTEM VIEW");
   purgeButton = new Button(width/6, height/2, 100, 50, #00FFFF, "DO NOT PRESS");
   
   // Initialise colours
@@ -71,8 +73,14 @@ void setup()
   fadeOut = new ArrayList<ColorHandler>();
   
   // Initialise intro text
-  fileInput = loadStrings("intro.txt");
+  fileInput = loadStrings("debug.txt");
+  if(fileInput == null)
+    System.exit(1);
   introText = new StringParser(join(fileInput, "\n"));
+  introFont = createFont("starwars.ttf", 30);
+  if(introFont == null)
+    System.exit(1);
+  textFont(introFont);
   //introText = new StringParser("Test string\r06\nNext String\r08\b\b\b\b\r04");
 }
 
@@ -168,7 +176,6 @@ boolean fade()
     // fade colours
     for(ColorHandler c : fadeOut)
     {
-      println("fading: " + fadeVariable);
       c.setAlpha((int)map(fadeVariable,0,fadeSpeed,0,255));
     }
     for(ColorHandler c : fadeIn)
@@ -260,11 +267,12 @@ void drawIntro()
   noFill();
   strokeWeight(1);
   stroke(c_intro_text.c);
-  rect(10,10,width-20,height-20);
+  rect(introGap,introGap,width-introGap*2,height-introGap*2);
   fill(c_intro_text.c);
   textSize(30);
   textAlign(LEFT,TOP);
-  text(introText.toString(), 10, 10);
+  textLeading(30);
+  text(introText.toString(), introGap*2, introGap*2);
   if(introText.finished)
   {
     introText.finished = false;
