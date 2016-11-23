@@ -18,8 +18,8 @@ Planet clickedPlanet;
 Debris purgeDebris[];
 
 // Buttons
-Button testButton;
-Button purgeButton;
+SysViewButton sysViewButton;
+PurgeButton purgeButton;
 
 // Colours that need to be faded are made using the ColorHandler class
 ColorHandler c_intro_text;
@@ -60,8 +60,8 @@ void setup()
   planets.add(p);
   
   // Initialise buttons
-  testButton = new Button(100, 500, 100, 50, #00FFFF, "SYSTEM VIEW");
-  purgeButton = new Button(width/6, height/2, 100, 50, #00FFFF, "DO NOT PRESS");
+  sysViewButton = new SysViewButton(100, 500, 100, 50, #00FFFF, "SYSTEM VIEW");
+  purgeButton = new PurgeButton(width/6, height/2, 100, 50, #00FFFF, "PURGE");
   
   // Initialise colours
   c_intro_text = new ColorHandler(color(192,192,192,255));
@@ -73,7 +73,7 @@ void setup()
   fadeOut = new ArrayList<ColorHandler>();
   
   // Initialise intro text
-  fileInput = loadStrings("intro.txt");
+  fileInput = loadStrings("debug.txt");
   if(fileInput == null)
     System.exit(1);
   introText = new StringParser(join(fileInput, "\n"));
@@ -143,8 +143,8 @@ void draw()
       }
       
       // Draw planet buttons
-      testButton.update();
-      testButton.render();
+      sysViewButton.update();
+      sysViewButton.render();
       purgeButton.update();
       purgeButton.render();
       break;
@@ -230,33 +230,9 @@ void mouseClicked()
       }
     }
     
-    if(testButton.mouseOver)
-    {
-      testButton.mouseOver = false;  // Clear mouseOver flag to prevent it from being clicked again
-      mouseLock = true;
-      state = 5;  // Transition from single planet to system view
-      fadeIn.add(c_system);
-      fadeIn.add(c_system_text);
-      fadeIn.add(c_system_purge);
-      fadeOut.add(c_singleplanet);
-      fadeVariable = fadeSpeed;
-    }
+    sysViewButton.clicked();
     
-    // PURGE
-    if(purgeButton.mouseOver)
-    {
-      if(clickedPlanet.purge == false)
-      {
-        clickedPlanet.purge();
-        purgeDebris = new Debris[numDebris];
-        Debris d;
-        for(int i = 0; i < numDebris; i++)
-        {
-          d = new Debris(centreX, centreY,random(-10,+10),random(-10,+10),random(0,PI/32), (int)random(180,240));
-          purgeDebris[i] = d;
-        }
-      }
-    }
+    purgeButton.clicked();
   }
 }
 
