@@ -33,7 +33,7 @@ ArrayList<ColorHandler> fadeIn;
 ArrayList<ColorHandler> fadeOut;
 
 // Intro text
-TypedText introText;
+StringParser introText;
 
 void setup()
 {
@@ -70,7 +70,7 @@ void setup()
   fadeOut = new ArrayList<ColorHandler>();
   
   // Initialise intro text
-  introText = new TypedText("Test string\nNext String\b\b\b\b\r20");
+  introText = new StringParser("Test string\r06\nNext String\r08\b\b\b\b\r04");
 }
 
 void draw()
@@ -112,11 +112,6 @@ void draw()
     // Single planet
     case 4:
       clickedPlanet.renderLarge();
-      testButton.update();
-      testButton.render();
-      purgeButton.update();
-      purgeButton.render();
-      
       // Draw debris
       if (purgeDebris != null)
       {
@@ -126,6 +121,12 @@ void draw()
           purgeDebris[i].render();
         }
       }
+      
+      // Draw planet buttons
+      testButton.update();
+      testButton.render();
+      purgeButton.update();
+      purgeButton.render();
       break;
       
     // Transition from single planet to system view
@@ -249,6 +250,10 @@ void drawIntro()
   text(introText.toString(), width/2, height/2);
   stroke(255);
   line(0,height/2,width,height/2);
+  if(introText.finished == true)
+  {
+    state = 2;
+  }
 }
 
 // Function to update the position of the planets in the system view

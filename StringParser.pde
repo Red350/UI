@@ -1,4 +1,18 @@
-class TypedText
+/* Class that parses a string and updates another string to give
+   it the appearance of being typed.
+   
+   Regular characters are added to the typed string every 5 frames.
+   The backspace character '\b' must be manually parsed as java
+   tries to output it as a character rather than removing a character
+   from the string.
+   '\r' is used to add a delay between characters being typed, during which
+   the cursor prompt will flash. The delay is set by the 2 characters following
+   the the '\r' character e.g. "\r20".
+   The delay number must be even, and the delay time is equivalent to half the
+   delay time in seconds, so "\r20" would wait for 10 seconds.
+*/
+
+class StringParser
 {
   String inputString;
   String displayString;
@@ -7,8 +21,9 @@ class TypedText
   int inputLength;
   int idleTime;
   char c;
+  boolean finished = false;
   
-  TypedText(String inputString)
+  StringParser(String inputString)
   {
     this.inputString = inputString;
     inputLength = inputString.length();
@@ -49,7 +64,11 @@ class TypedText
             i++;
           }
         }
-      } 
+      }
+      else
+      {
+        finished = true;
+      }
     }
     else
     {
