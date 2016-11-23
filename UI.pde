@@ -32,8 +32,12 @@ ColorHandler c_singleplanet;
 ColorHandler c_debris;
 ColorHandler c_button;
 
-// Array lists for storing colors
-// Colors are just integers in processing
+// These array lists store the colours for each screen
+ArrayList<ColorHandler> screen_intro;
+ArrayList<ColorHandler> screen_system;
+ArrayList<ColorHandler> screen_singleplanet;
+
+// These array lists point to the arrays above when they are being faded
 ArrayList<ColorHandler> fadeIn;
 ArrayList<ColorHandler> fadeOut;
 
@@ -78,8 +82,18 @@ void setup()
   c_singleplanet = new ColorHandler(color(255,0,0,0));
   c_debris = new ColorHandler(color(255,0,0,0));
   c_button = new ColorHandler(color(0,255,255,0));
-  fadeIn = new ArrayList<ColorHandler>();
-  fadeOut = new ArrayList<ColorHandler>();
+  
+  screen_intro = new ArrayList<ColorHandler>();
+  screen_system = new ArrayList<ColorHandler>();
+  screen_singleplanet = new ArrayList<ColorHandler>();
+  
+  screen_intro.add(c_intro_text);
+  screen_system.add(c_system);
+  screen_system.add(c_system_purge);
+  screen_system.add(c_system_text);
+  screen_singleplanet.add(c_singleplanet);
+  screen_singleplanet.add(c_debris);
+  screen_singleplanet.add(c_button);
   
   // Initialise intro text
   fileInput = loadStrings("debug.txt");
@@ -197,8 +211,6 @@ boolean fade()
   else
   {
     // Clear the fade arrays
-    fadeIn.clear();
-    fadeOut.clear();
     return true;
   }
 }
@@ -243,10 +255,8 @@ void drawIntro()
   if(introText.finished)
   {
     introText.finished = false;
-    fadeIn.add(c_system);
-    fadeIn.add(c_system_text);
-    fadeIn.add(c_system_purge);
-    fadeOut.add(c_intro_text);
+    fadeIn = screen_system;
+    fadeOut = screen_intro;
     fadeVariable = fadeSpeed;
     state = 1;
   }

@@ -12,12 +12,8 @@ class SysViewButton extends Button
       super.mouseOver = false;  // Clear mouseOver flag to prevent it from being clicked again
       mouseLock = true;
       state = 5;  // Transition from single planet to system view
-      fadeIn.add(c_system);
-      fadeIn.add(c_system_text);
-      fadeIn.add(c_system_purge);
-      fadeOut.add(c_singleplanet);
-      fadeOut.add(c_debris);
-      fadeOut.add(c_button);
+      fadeIn = screen_system;
+      fadeOut = screen_singleplanet;
       fadeVariable = fadeSpeed;
     }
   }

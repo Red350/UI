@@ -22,7 +22,11 @@ class Debris
     theta += thetaDelta;
     
     // Fade colour for the last 60 frames of the debris' life
-    if(aliveTime <= 60)
+    // By letting this loop to -1, it resets the red part of the colour back 
+    // to it's full value, but since it will never draw when aliveTime is < 0, 
+    // the fade still works correctly. The reason for doing this is it preps the colour
+    // for the next time it is needed.
+    if(aliveTime < 60 && aliveTime >= -1)
     {
       c_debris.setRed((int)map(aliveTime, 60, 0, 255, 0));
     }
