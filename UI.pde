@@ -3,6 +3,8 @@
     C15755659
 */
 
+import processing.sound.*;
+
 /* Constants */
 public static final int fadeSpeed = 30; // Number of frames over which a fade transition happens
 public static final int numDebris = 100;  // Number of debris objects after a purge
@@ -39,6 +41,9 @@ ArrayList<ColorHandler> fadeOut;
 String fileInput[];
 StringParser introText;
 PFont introFont;
+
+// Sounds
+SoundFile bgMusic;
 
 void setup()
 {
@@ -85,6 +90,12 @@ void setup()
   if(introFont == null)
     System.exit(1);
   textFont(introFont);
+  
+  // Initialise sounds
+  bgMusic = new SoundFile(this, "space1.mp3");
+  if(bgMusic == null)
+    System.exit(1);
+   bgMusic.loop();
 }
 
 void draw()

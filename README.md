@@ -14,3 +14,11 @@ I planned very early for my UI to be based on a solar system. I created an [expe
 ColourHandler class
 Global ColorHandler arrays
 Bit shifting to change alpha value
+
+## Asset Credits
+
+### Font
+Star wars font - [STARWARS.TTF](http://www.fonts2u.com/starwars.font) by Jose Gonzalez Pareja
+
+### Audio
+Background music - [space1.mp3](https://www.freesound.org/people/alaupas/sounds/176685/) by alaupas
