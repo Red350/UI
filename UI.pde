@@ -73,15 +73,14 @@ void setup()
   fadeOut = new ArrayList<ColorHandler>();
   
   // Initialise intro text
-  fileInput = loadStrings("debug.txt");
+  fileInput = loadStrings("intro.txt");
   if(fileInput == null)
     System.exit(1);
   introText = new StringParser(join(fileInput, "\n"));
-  introFont = createFont("starwars.ttf", 30);
+  introFont = createFont("starwars.ttf", 30, true);
   if(introFont == null)
     System.exit(1);
   textFont(introFont);
-  //introText = new StringParser("Test string\r06\nNext String\r08\b\b\b\b\r04");
 }
 
 void draw()
