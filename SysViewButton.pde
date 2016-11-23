@@ -1,8 +1,8 @@
 class SysViewButton extends Button
 {
-  SysViewButton(int x, int y, int w, int h, color c, String text)
+  SysViewButton(int x, int y, int w, int h, String text)
   {
-    super(x, y, w, h, c, text);
+    super(x, y, w, h, text);
   }
   
   void clicked()
@@ -16,6 +16,7 @@ class SysViewButton extends Button
       fadeIn.add(c_system_text);
       fadeIn.add(c_system_purge);
       fadeOut.add(c_singleplanet);
+      fadeOut.add(c_button);
       fadeVariable = fadeSpeed;
     }
   }

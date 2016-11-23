@@ -27,6 +27,7 @@ ColorHandler c_system;
 ColorHandler c_system_purge;
 ColorHandler c_system_text;
 ColorHandler c_singleplanet;
+ColorHandler c_button;
 
 // Array lists for storing colors
 // Colors are just integers in processing
@@ -60,8 +61,8 @@ void setup()
   planets.add(p);
   
   // Initialise buttons
-  sysViewButton = new SysViewButton(100, 500, 100, 50, #00FFFF, "SYSTEM VIEW");
-  purgeButton = new PurgeButton(width/6, height/2, 100, 50, #00FFFF, "PURGE");
+  sysViewButton = new SysViewButton(100, 500, 100, 50, "SYSTEM VIEW");
+  purgeButton = new PurgeButton(width/6, height/2, 100, 50, "PURGE");
   
   // Initialise colours
   c_intro_text = new ColorHandler(color(192,192,192,255));
@@ -69,6 +70,7 @@ void setup()
   c_system_purge = new ColorHandler(color(255,0,0,0));
   c_system_text = new ColorHandler(color(255,255,255,0));
   c_singleplanet = new ColorHandler(color(255,0,0,0));
+  c_button = new ColorHandler(color(0,255,255,0));
   fadeIn = new ArrayList<ColorHandler>();
   fadeOut = new ArrayList<ColorHandler>();
   
@@ -122,6 +124,8 @@ void draw()
     case 3:
       drawPlanets();
       clickedPlanet.renderLarge();
+      sysViewButton.render();
+      purgeButton.render();
       if (fade())
       {
         state = 4;
@@ -143,6 +147,8 @@ void draw()
     // Transition from single planet to system view
     case 5:
       drawPlanets();
+      sysViewButton.render();
+      purgeButton.render();
       clickedPlanet.renderLarge();
       if (fade())
       {

@@ -51,6 +51,7 @@ class Planet
         fadeOut.add(c_system_text);
         fadeOut.add(c_system_purge);
         fadeIn.add(c_singleplanet);
+        fadeIn.add(c_button);
         fadeVariable = fadeSpeed;
       }
   }
