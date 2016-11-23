@@ -203,33 +203,15 @@ void mouseOver()
   }
 }
 
-// Checks if a planet has been clicked
-// If so change state to the transition between system and planet view
+// Calls the clicked method for each object that can be clicked
 void mouseClicked()
 {
   if(!mouseLock)
   {
-    // Can use the fact that if the mouse is over a planet,
-    // the planet's mouseOver boolean will be set to true.
     for (Planet p : planets)
     {
-      if (p.mouseOver)
-      {
-        mouseLock = true;
-        // Clear mouseOver flag to prevent it from being clicked again
-        p.mouseOver = false;
-        clickedPlanet = p;
-        state = 3;
-        // add colours to their respective fade arrays
-        // In this case we are fading out the system and fading in large planet
-        fadeOut.add(c_system);
-        fadeOut.add(c_system_text);
-        fadeOut.add(c_system_purge);
-        fadeIn.add(c_singleplanet);
-        fadeVariable = fadeSpeed;
-      }
-    }
-    
+      p.clicked();
+    } 
     sysViewButton.clicked();
     
     purgeButton.clicked();

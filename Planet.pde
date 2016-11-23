@@ -30,6 +30,27 @@ class Planet
   void mouseOver()
   {
     mouseOver = dist(mouseX, mouseY, x, y) < size ? true : false;
+    if(mouseOver)
+      println("over " + name);
+  }
+  
+  void clicked()
+  {
+    if (mouseOver)
+      {
+        mouseLock = true;
+        // Clear mouseOver flag to prevent it from being clicked again
+        mouseOver = false;
+        clickedPlanet = this;
+        state = 3;
+        // add colours to their respective fade arrays
+        // In this case we are fading out the system and fading in large planet
+        fadeOut.add(c_system);
+        fadeOut.add(c_system_text);
+        fadeOut.add(c_system_purge);
+        fadeIn.add(c_singleplanet);
+        fadeVariable = fadeSpeed;
+      }
   }
   
   // Render as part of the system
