@@ -1,5 +1,6 @@
 /*  OOP Assignment: Sci-fi UI
-    Pádraig Redmond C15755659
+    Pádraig Redmond 
+    C15755659
 */
 
 /* Constants */
@@ -12,10 +13,9 @@ int fadeVariable;
 int introGap = 10;
 boolean mouseLock = false;  // Prevents the mouse from being clicked during transitions
 
-// Planets and debris
+// Planets
 ArrayList<Planet> planets;  
 Planet clickedPlanet;
-Debris purgeDebris[];
 
 // Buttons
 SysViewButton sysViewButton;
@@ -115,7 +115,7 @@ void draw()
     // Draw planet view
     case 2:
       drawPlanets();
-      mouseOver();  // Checks if the mouse is hovering over any planet
+      mouseOverPlanets();  // Checks mouse is hovering over any planet
       break;
      
     // Transition from system view to single planet
@@ -132,15 +132,6 @@ void draw()
     // Single planet
     case 4:
       clickedPlanet.renderLarge();
-      // Draw debris
-      if (purgeDebris != null)
-      {
-        for (int i = 0; i < numDebris; i++)
-        {
-          purgeDebris[i].update();
-          purgeDebris[i].render();
-        }
-      }
       
       // Draw planet buttons
       sysViewButton.update();
@@ -195,7 +186,7 @@ boolean fade()
 
 // Calls mouseOver function for each planet
 // TODO: Make the planet mouseover function part of its update function
-void mouseOver()
+void mouseOverPlanets()
 {
   for (Planet p: planets)
   {

@@ -10,7 +10,8 @@ class Planet
   int offset = 0;
   boolean purge = false;
   float purgeX, purgeY;
-  float purgeArcLength = PI / 8;
+  float ghostArcLength = PI / 8;
+  Debris purgeDebris[];
   
   Planet(String name, int distance, float speed)
   {
@@ -23,6 +24,7 @@ class Planet
     largeSize = 700;
     fifthLs = largeSize / 5; // This is used to calculate the horizontal lines on the large planet
     mouseOver = false;  // Check if the mouse is over the planet
+    purgeDebris = new Debris[100];
     
     update();  // Call update once to set planet location
   }
@@ -88,9 +90,9 @@ class Planet
       // Draw predicted position of where it would have been
       stroke(c_system.c);
       noFill();
-      for(float i = 0; i < TWO_PI; i += purgeArcLength)
+      for(float i = 0; i < TWO_PI; i += ghostArcLength)
       {
-        arc(x, y, size, size, i, i+purgeArcLength/2);
+        arc(x, y, size, size, i, i+ghostArcLength/2);
       }
     } 
   }
@@ -133,6 +135,14 @@ class Planet
       arc(centreX, centreY-largeSize/2+fifthLs*3, largeSize, fifthLs, QUARTER_PI-radians(30), PI-QUARTER_PI+radians(30));
       arc(centreX, centreY-largeSize/2+fifthLs*4, largeSize, fifthLs, QUARTER_PI+radians(4), PI-QUARTER_PI-radians(4));
     }
+    else
+    {
+      for (int i = 0; i < numDebris; i++)
+      {
+        purgeDebris[i].update();
+        purgeDebris[i].render();
+      }
+    }
   }
   
   void purge()
@@ -140,6 +150,12 @@ class Planet
     purge = true;
     purgeX = x;
     purgeY = y;
+    Debris d;
+    for(int i = 0; i < numDebris; i++)
+    {
+      d = new Debris(centreX, centreY,random(-10,+10),random(-10,+10),random(0,PI/32), (int)random(180,240));
+      purgeDebris[i] = d;
+    }
   }
   
   void update()
