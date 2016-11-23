@@ -33,6 +33,7 @@ ArrayList<ColorHandler> fadeIn;
 ArrayList<ColorHandler> fadeOut;
 
 // Intro text
+String fileInput[];
 StringParser introText;
 
 void setup()
@@ -70,7 +71,9 @@ void setup()
   fadeOut = new ArrayList<ColorHandler>();
   
   // Initialise intro text
-  introText = new StringParser("Test string\r06\nNext String\r08\b\b\b\b\r04");
+  fileInput = loadStrings("intro.txt");
+  introText = new StringParser(join(fileInput, "\n"));
+  //introText = new StringParser("Test string\r06\nNext String\r08\b\b\b\b\r04");
 }
 
 void draw()
@@ -243,17 +246,14 @@ void mouseClicked()
 
 void drawIntro()
 {
-  
   introText.update();
+  noFill();
+  stroke(255);
+  rect(10,10,width-10,height-10);
+  fill(255);
   textSize(30);
   textAlign(LEFT,TOP);
-  text(introText.toString(), width/2, height/2);
-  stroke(255);
-  line(0,height/2,width,height/2);
-  if(introText.finished == true)
-  {
-    state = 2;
-  }
+  text(introText.toString(), 10, 10);
 }
 
 // Function to update the position of the planets in the system view

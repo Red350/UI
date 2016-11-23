@@ -1,0 +1,11 @@
+Welcome to blah system v1.3.4.5	04
+Access available to level x employees only	04
+Enter your login details
+Username:	04 vader
+Password:	04 ****
+Validating...	04
+Access granted	04
+Loading planetary system(rebel system name)	04
+Loading orbital data	04
+Loading death beam\b\b\b\b\b\b\b\b\b\b<DATA OBSCURED>	04
+Please ensure you log off after use...	04

@@ -5,11 +5,11 @@
    The backspace character '\b' must be manually parsed as java
    tries to output it as a character rather than removing a character
    from the string.
-   '\r' is used to add a delay between characters being typed, during which
+   '\t' is used to add a delay between characters being typed, during which
    the cursor prompt will flash. The delay is set by the 2 characters following
-   the the '\r' character e.g. "\r20".
+   the the '\t' character e.g. "\t20".
    The delay number must be even, and the delay time is equivalent to half the
-   delay time in seconds, so "\r20" would wait for 10 seconds.
+   delay time in seconds, so "\t20" would wait for 10 seconds.
 */
 
 class StringParser
@@ -41,8 +41,8 @@ class StringParser
       {
         c = inputString.charAt(i);
         
-        // Check if we're at a carriage return character, which to us means start idle time
-        if(c == '\r')
+        // Check if we're at a tab character, which to us means start idle time
+        if(c == '\t')
         {
           idleTime = Integer.parseInt(inputString.substring(i+1,i+3));
           i+=3;
