@@ -21,7 +21,7 @@ Button testButton;
 Button purgeButton;
 
 // Colours that need to be faded are made using the ColorHandler class
-ColorHandler c_intro;
+ColorHandler c_intro_text;
 ColorHandler c_system;
 ColorHandler c_system_purge;
 ColorHandler c_system_text;
@@ -62,10 +62,10 @@ void setup()
   purgeButton = new Button(width/6, height/2, 100, 50, #00FFFF, "DO NOT PRESS");
   
   // Initialise colours
-  c_intro = new ColorHandler(color(0,0,255,0));
-  c_system = new ColorHandler(color(0,255,0,255));
-  c_system_purge = new ColorHandler(color(255,0,0));
-  c_system_text = new ColorHandler(color(255,255,255,255));
+  c_intro_text = new ColorHandler(color(192,192,192,255));
+  c_system = new ColorHandler(color(0,255,0,0));
+  c_system_purge = new ColorHandler(color(255,0,0,0));
+  c_system_text = new ColorHandler(color(255,255,255,0));
   c_singleplanet = new ColorHandler(color(255,0,0,0));
   fadeIn = new ArrayList<ColorHandler>();
   fadeOut = new ArrayList<ColorHandler>();
@@ -93,6 +93,16 @@ void draw()
     // Draw intro
     case 0:
       drawIntro();
+      break;
+    
+    // Transition from intro to system view
+    case 1:
+      drawIntro();
+      drawPlanets();
+      if(fade())
+      {
+        state = 2;
+      }
       break;
     
     // Draw planet view
@@ -158,6 +168,7 @@ boolean fade()
     // fade colours
     for(ColorHandler c : fadeOut)
     {
+      println("fading: " + fadeVariable);
       c.setAlpha((int)map(fadeVariable,0,fadeSpeed,0,255));
     }
     for(ColorHandler c : fadeIn)
@@ -175,7 +186,7 @@ boolean fade()
     return true;
   }
 }
- 
+
 // Calls mouseOver function for each planet
 // TODO: Make the planet mouseover function part of its update function
 void mouseOver()
@@ -184,7 +195,6 @@ void mouseOver()
   {
     p.mouseOver();
   }
-  
 }
 
 // Checks if a planet has been clicked
@@ -248,12 +258,23 @@ void drawIntro()
 {
   introText.update();
   noFill();
-  stroke(255);
-  rect(10,10,width-10,height-10);
-  fill(255);
+  strokeWeight(1);
+  stroke(c_intro_text.c);
+  rect(10,10,width-20,height-20);
+  fill(c_intro_text.c);
   textSize(30);
   textAlign(LEFT,TOP);
   text(introText.toString(), 10, 10);
+  if(introText.finished)
+  {
+    introText.finished = false;
+    fadeIn.add(c_system);
+    fadeIn.add(c_system_text);
+    fadeIn.add(c_system_purge);
+    fadeOut.add(c_intro_text);
+    fadeVariable = fadeSpeed;
+    state = 1;
+  }
 }
 
 // Function to update the position of the planets in the system view

@@ -41,17 +41,17 @@ class StringParser
       {
         c = inputString.charAt(i);
         
-        // Check if we're at a tab character, which to us means start idle time
-        if(c == '\t')
+        // Check if we're at a control character
+        if(c == '^')
         {
           idleTime = Integer.parseInt(inputString.substring(i+1,i+3));
           i+=3;
         }
         else
         {
-          if (frameCount % 5 == 0)
+          if (frameCount % 2 == 0)
           {
-            if(inputString.charAt(i) == '\b')
+            if(inputString.charAt(i) == '$')
             {
               displayString = displayString.substring(0,displayIndex-1);
               displayIndex--;
@@ -67,7 +67,10 @@ class StringParser
       }
       else
       {
+        // At this point the string is fully parsed
+        // I set idle time to 100 to allow more than enough time for the screen to fade
         finished = true;
+        idleTime = 100;
       }
     }
     else
