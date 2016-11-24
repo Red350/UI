@@ -71,7 +71,7 @@ class Planet
     // Draw either a planet or an X where the planet was purged
     if (!purge)
     {
-      strokeWeight(3);
+      strokeWeight(2);
       ellipse(x, y, size, size);  // Draw planet
       
       // Draw text
@@ -150,9 +150,10 @@ class Planet
     purgeX = x;
     purgeY = y;
     Debris d;
+    int speed = 7;
     for(int i = 0; i < numDebris; i++)
     {
-      d = new Debris(centreX, centreY,random(-10,+10),random(-10,+10),random(0,PI/32), (int)random(180,240));
+      d = new Debris(centreX, centreY,random(-speed,+speed),random(-speed,+speed),random(0,PI/32), (int)random(180,240));
       purgeDebris[i] = d;
     }
   }

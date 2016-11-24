@@ -71,11 +71,11 @@ void setup()
   planets.add(p);
   p = new Planet("Alderaan", 300, 0.001);
   planets.add(p);
-  sun = new Sun();
+  sun = new Sun(centreX, centreY);
   
   // Initialise buttons
-  sysViewButton = new SysViewButton(100, 500, 100, 50, "SYSTEM VIEW");
-  purgeButton = new PurgeButton(width/6, height/2, 100, 50, "PURGE");
+  sysViewButton = new SysViewButton(100, height-100, 100, 50, "SYSTEM VIEW");
+  purgeButton = new PurgeButton(width-200, height-100, 100, 50, "PURGE");
   
   // Initialise colours
   c_intro_text = new ColorHandler(color(192,192,192,255));
@@ -139,8 +139,7 @@ void draw()
     // Transition from intro to system view
     case 1:
       drawIntro();
-      drawPlanets();
-      sun.render();
+      drawSystem();
       if(fade())
       {
         state = 2;
@@ -149,17 +148,14 @@ void draw()
     
     // Draw planet view
     case 2:
-      drawPlanets();
-      sun.render();
+      drawSystem();
       mouseOverPlanets();  // Checks mouse is hovering over any planet
       break;
      
     // Transition from system view to single planet
     case 3:
-      drawPlanets();
-      clickedPlanet.renderLarge();
-      sysViewButton.render();
-      purgeButton.render();
+      drawSystem();
+      drawSinglePlanet();
       if (fade())
       {
         state = 4;
@@ -169,21 +165,15 @@ void draw()
     
     // Single planet
     case 4:
-      clickedPlanet.renderLarge();
-      
-      // Draw planet buttons
+      drawSinglePlanet();
       sysViewButton.update();
-      sysViewButton.render();
       purgeButton.update();
-      purgeButton.render();
       break;
       
     // Transition from single planet to system view
     case 5:
-      drawPlanets();
-      sysViewButton.render();
-      purgeButton.render();
-      clickedPlanet.renderLarge();
+      drawSystem();
+      drawSinglePlanet();
       if (fade())
       {
         state = 2;
@@ -275,10 +265,18 @@ void updatePlanets()
 }
 
 // Function to draw the planets in the system view
-void drawPlanets()
+void drawSystem()
 {
   for (Planet p: planets)
   {
     p.render();
   }
+  sun.render();
+}
+
+void drawSinglePlanet()
+{
+  clickedPlanet.renderLarge();
+  sysViewButton.render();
+  purgeButton.render();
 }
