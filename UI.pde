@@ -55,7 +55,7 @@ void setup()
   frameRate(60);
   
   // Centre of the planet system
-  centreX = width*2/3;
+  centreX = width/2;
   centreY = height/2;
   
   state = 0;  // Default planet view
@@ -121,7 +121,7 @@ void draw()
   textSize(12);
   text(" State " + state + " x: "+mouseX+" y: "+mouseY+ " fps: " + frameRate, 10, 15);
   
-  drawPanel();  // Draw the user panel of the left side of the screen
+    // Draw the user panel of the left side of the screen
   updatePlanets();  // Update the planets every frame, even when not displayed
   
   switch(state)
@@ -135,6 +135,7 @@ void draw()
     case 1:
       drawIntro();
       drawPlanets();
+      drawPanel();
       if(fade())
       {
         state = 2;
@@ -144,6 +145,7 @@ void draw()
     // Draw planet view
     case 2:
       drawPlanets();
+      drawPanel();
       mouseOverPlanets();  // Checks mouse is hovering over any planet
       break;
      
@@ -184,10 +186,6 @@ void draw()
       }
       break;
   }
-}
-
-void drawPanel()
-{
 }
 
 // Fades colours in or out depending on the
