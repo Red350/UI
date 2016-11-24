@@ -14,7 +14,7 @@ int speed = 5;
 void drawPanel()
 {
   x = cos(theta3)*10 + 100;
-  theta3+=0.1;
+  theta3+=0.;
   
   noStroke();
   fill(c_system_text.c);

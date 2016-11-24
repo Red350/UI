@@ -18,6 +18,7 @@ boolean mouseLock = false;  // Prevents the mouse from being clicked during tran
 // Planets
 ArrayList<Planet> planets;  
 Planet clickedPlanet;
+Sun sun;
 
 // Buttons
 SysViewButton sysViewButton;
@@ -26,6 +27,7 @@ PurgeButton purgeButton;
 // Colours that need to be faded are made using the ColorHandler class
 ColorHandler c_intro_text;
 ColorHandler c_system;
+ColorHandler c_sun;
 ColorHandler c_system_purge;
 ColorHandler c_system_text;
 ColorHandler c_singleplanet;
@@ -51,7 +53,7 @@ SoundFile bgMusic;
 
 void setup()
 {
-  size(1200, 800);
+  size(800,800);
   frameRate(60);
   
   // Centre of the planet system
@@ -69,6 +71,7 @@ void setup()
   planets.add(p);
   p = new Planet("Alderaan", 300, 0.001);
   planets.add(p);
+  sun = new Sun();
   
   // Initialise buttons
   sysViewButton = new SysViewButton(100, 500, 100, 50, "SYSTEM VIEW");
@@ -77,6 +80,7 @@ void setup()
   // Initialise colours
   c_intro_text = new ColorHandler(color(192,192,192,255));
   c_system = new ColorHandler(color(0,255,0,0));
+  c_sun = new ColorHandler(color(255,255,0,0));
   c_system_purge = new ColorHandler(color(255,0,0,0));
   c_system_text = new ColorHandler(color(255,255,255,0));
   c_singleplanet = new ColorHandler(color(255,0,0,0));
@@ -89,6 +93,7 @@ void setup()
   
   screen_intro.add(c_intro_text);
   screen_system.add(c_system);
+  screen_system.add(c_sun);
   screen_system.add(c_system_purge);
   screen_system.add(c_system_text);
   screen_singleplanet.add(c_singleplanet);
@@ -135,7 +140,7 @@ void draw()
     case 1:
       drawIntro();
       drawPlanets();
-      drawPanel();
+      sun.render();
       if(fade())
       {
         state = 2;
@@ -145,7 +150,7 @@ void draw()
     // Draw planet view
     case 2:
       drawPlanets();
-      drawPanel();
+      sun.render();
       mouseOverPlanets();  // Checks mouse is hovering over any planet
       break;
      
