@@ -31,7 +31,10 @@ class Planet
   
   void mouseOver()
   {
-    mouseOver = dist(mouseX, mouseY, x, y) < size ? true : false;
+    if(!purge)
+      mouseOver = dist(mouseX, mouseY, x, y) < size ? true : false;
+     else
+       mouseOver = dist(mouseX, mouseY, purgeX, purgeY) < size ? true : false;
   }
   
   void clicked()
