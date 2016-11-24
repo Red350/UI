@@ -21,4 +21,5 @@ Bit shifting to change alpha value
 Star wars font - [STARWARS.TTF](http://www.fonts2u.com/starwars.font) by Jose Gonzalez Pareja
 
 ### Audio
+Background music - [deepspace.mp3](https://www.freesound.org/people/keinzweiter/sounds/161615/) by keinzweiter
 Background music - [space1.mp3](https://www.freesound.org/people/alaupas/sounds/176685/) by alaupas

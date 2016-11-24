@@ -106,7 +106,7 @@ void setup()
   textFont(introFont);
   
   // Initialise sounds
-  bgMusic = new SoundFile(this, "space1.mp3");
+  bgMusic = new SoundFile(this, "deepspace.mp3");
   if(bgMusic == null)
     System.exit(1);
    bgMusic.loop();
