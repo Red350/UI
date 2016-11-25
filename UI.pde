@@ -19,6 +19,7 @@ boolean mouseLock = false;  // Prevents the mouse from being clicked during tran
 ArrayList<Planet> planets;  
 Planet clickedPlanet;
 Sun sun;
+ArrayList<Star> stars;
 
 // Buttons
 SysViewButton sysViewButton;
@@ -72,6 +73,12 @@ void setup()
   p = new Planet("Alderaan", 300, 0.001);
   planets.add(p);
   sun = new Sun(centreX, centreY);
+  stars = new ArrayList<Star>();
+  for(int i = 0; i < 1000; i++)
+  {
+    Star s = new Star((int)random(width), (int)random(height), 0,0,1);
+    stars.add(s);
+  }
   
   // Initialise buttons
   sysViewButton = new SysViewButton(100, height-100, 100, 50, "SYSTEM VIEW");
@@ -148,12 +155,15 @@ void draw()
     
     // Draw planet view
     case 2:
+      drawStars();
       drawSystem();
       mouseOverPlanets();  // Checks mouse is hovering over any planet
+      
       break;
      
     // Transition from system view to single planet
     case 3:
+      drawStars();
       drawSystem();
       drawSinglePlanet();
       if (fade())
@@ -165,6 +175,7 @@ void draw()
     
     // Single planet
     case 4:
+      drawStars();
       drawSinglePlanet();
       sysViewButton.update();
       purgeButton.update();
@@ -172,6 +183,7 @@ void draw()
       
     // Transition from single planet to system view
     case 5:
+      drawStars();
       drawSystem();
       drawSinglePlanet();
       if (fade())
@@ -279,4 +291,12 @@ void drawSinglePlanet()
   clickedPlanet.renderLarge();
   sysViewButton.render();
   purgeButton.render();
+}
+
+void drawStars()
+{
+  for(Star s : stars)
+  {
+    s.render();
+  }
 }
