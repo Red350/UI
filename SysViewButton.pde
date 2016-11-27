@@ -1,8 +1,8 @@
 class SysViewButton extends Button
 {
-  SysViewButton(int x, int y, int w, int h, String text)
+  SysViewButton(int x, int y, int w, int h, String text, ColorHandler ch)
   {
-    super(x, y, w, h, text);
+    super(x, y, w, h, text, ch);
   }
   
   void clicked()

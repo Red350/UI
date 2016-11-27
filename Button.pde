@@ -4,22 +4,25 @@ class Button
   String text;
   int cornerRad = 10;
   boolean mouseOver = false;
-  Button(int x, int y, int w, int h, String text)
+  ColorHandler cHandler;
+  
+  Button(int x, int y, int w, int h, String text, ColorHandler cHandler)
   {
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h;
     this.text = text;
+    this.cHandler = cHandler;
   }
   
   void render()
   {
-    stroke(c_button.c);
+    stroke(cHandler.c);
     strokeWeight(1);
     
     if (mouseOver)
-      fill(c_button.c);
+      fill(cHandler.c);
     else
       noFill();
       
@@ -28,7 +31,7 @@ class Button
     if (mouseOver)
       fill(0);
     else
-      fill(c_button.c);
+      fill(cHandler.c);
       
     textAlign(CENTER, CENTER);
     text(text, x + w/2, y + h/2);

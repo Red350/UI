@@ -1,9 +1,9 @@
 class PurgeButton extends Button
 {
   
-  PurgeButton(int x, int y, int w, int h, String text)
+  PurgeButton(int x, int y, int w, int h, String text, ColorHandler ch)
   {
-    super(x, y, w, h, text);
+    super(x, y, w, h, text, ch);
   }
   
   void clicked()

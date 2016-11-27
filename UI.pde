@@ -25,6 +25,7 @@ ArrayList<Star> stars;
 // Buttons
 SysViewButton sysViewButton;
 PurgeButton purgeButton;
+PauseButton pauseButton;
 
 // Colours that need to be faded are made using the ColorHandler class
 ColorHandler c_intro_text;
@@ -32,10 +33,11 @@ ColorHandler c_system;
 ColorHandler c_sun;
 ColorHandler c_system_purge;
 ColorHandler c_system_text;
+ColorHandler c_system_button;
 ColorHandler c_singleplanet;
 ColorHandler c_singleplanet_surface;
 ColorHandler c_debris;
-ColorHandler c_button;
+ColorHandler c_singleplanet_button;
 
 // These array lists store the colours for each screen
 ArrayList<ColorHandler> screen_intro;
@@ -82,20 +84,17 @@ void setup()
     stars.add(s);
   }
   
-  // Initialise buttons
-  sysViewButton = new SysViewButton(100, height-100, 100, 50, "SYSTEM VIEW");
-  purgeButton = new PurgeButton(width-200, height-100, 100, 50, "PURGE");
-  
   // Initialise colours
   c_intro_text = new ColorHandler(color(192,192,192,255));
   c_system = new ColorHandler(color(0,255,0,0));
   c_sun = new ColorHandler(color(255,255,0,0));
   c_system_purge = new ColorHandler(color(255,0,0,0));
   c_system_text = new ColorHandler(color(255,255,255,0));
+  c_system_button = new ColorHandler(color(0,255,255,0));
   c_singleplanet = new ColorHandler(color(255,0,0,0));
   c_singleplanet_surface = new ColorHandler(color(50,0,0,0));
   c_debris = new ColorHandler(color(255,0,0,0));
-  c_button = new ColorHandler(color(0,255,255,0));
+  c_singleplanet_button = new ColorHandler(color(0,255,255,0));
   
   screen_intro = new ArrayList<ColorHandler>();
   screen_system = new ArrayList<ColorHandler>();
@@ -106,10 +105,16 @@ void setup()
   screen_system.add(c_sun);
   screen_system.add(c_system_purge);
   screen_system.add(c_system_text);
+  screen_system.add(c_system_button);
   screen_singleplanet.add(c_singleplanet);
   screen_singleplanet.add(c_singleplanet_surface);
   screen_singleplanet.add(c_debris);
-  screen_singleplanet.add(c_button);
+  screen_singleplanet.add(c_singleplanet_button);
+  
+  // Initialise buttons
+  sysViewButton = new SysViewButton(100, height-100, 100, 50, "SYSTEM VIEW", c_singleplanet_button);
+  purgeButton = new PurgeButton(width-200, height-100, 100, 50, "PURGE", c_singleplanet_button);
+  pauseButton = new PauseButton(100, 100, 100, 50, "PAUSE", c_system_button);
   
   // Initialise intro text
   fileInput = loadStrings("debug.txt");
@@ -166,6 +171,7 @@ void draw()
       //drawStars();
       drawSystem();
       mouseOverPlanets();
+      pauseButton.update();
       break;
      
     // Transition from system view to single planet
@@ -247,8 +253,8 @@ void mouseClicked()
       p.clicked();
     } 
     sysViewButton.clicked();
-    
     purgeButton.clicked();
+    pauseButton.clicked();
   }
 }
 
@@ -291,6 +297,7 @@ void drawSystem()
     p.render();
   }
   sun.render();
+  pauseButton.render();
 }
 
 void drawSinglePlanet()
