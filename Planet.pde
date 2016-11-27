@@ -113,7 +113,6 @@ class Planet
       // Draw half ellipses that move across the planets surface
       // to give the illusion of rotation
       fill(c_singleplanet_surface.c);
-      println("Color is: " + c_singleplanet_surface.c);
       ellipse(centreX, centreY, largeSize, largeSize);
       noFill();
       arc(centreX, centreY, largeSize-offset, largeSize, HALF_PI, PI + HALF_PI);

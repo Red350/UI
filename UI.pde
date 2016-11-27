@@ -92,7 +92,7 @@ void setup()
   c_system_purge = new ColorHandler(color(255,0,0,0));
   c_system_text = new ColorHandler(color(255,255,255,0));
   c_singleplanet = new ColorHandler(color(255,0,0,0));
-  c_singleplanet_surface = new ColorHandler(color(1,1,1,0));
+  c_singleplanet_surface = new ColorHandler(color(50,0,0,0));
   c_debris = new ColorHandler(color(255,0,0,0));
   c_button = new ColorHandler(color(0,255,255,0));
   
@@ -136,8 +136,8 @@ void draw()
   textSize(12);
   text(" State " + state + " x: "+mouseX+" y: "+mouseY+ " fps: " + frameRate, 10, 15);
   
-    // Draw the user panel of the left side of the screen
   updatePlanets();  // Update the planets every frame, even when not displayed
+  drawStars();
   
   switch(state)
   {
@@ -148,6 +148,7 @@ void draw()
     
     // Transition from intro to system view
     case 1:
+      //drawStarsFadeIn();
       drawIntro();
       drawSystem();
       if(fade())
@@ -158,14 +159,14 @@ void draw()
     
     // Draw system view
     case 2:
-      drawStars();
+      //drawStars();
       drawSystem();
       mouseOverPlanets();
       break;
      
     // Transition from system view to single planet
     case 3:
-      drawStars();
+      //drawStars();
       drawSystem();
       drawSinglePlanet();
       if (fade())
@@ -177,7 +178,7 @@ void draw()
     
     // Single planet
     case 4:
-      drawStars();
+      //drawStars();
       drawSinglePlanet();
       sysViewButton.update();
       purgeButton.update();
@@ -185,7 +186,7 @@ void draw()
       
     // Transition from single planet to system view
     case 5:
-      drawStars();
+      //drawStars();
       drawSystem();
       drawSinglePlanet();
       if (fade())
@@ -300,5 +301,13 @@ void drawStars()
   for(Star s : stars)
   {
     s.render();
+  }
+}
+
+void drawStarsFadeIn()
+{
+  for(Star s : stars)
+  {
+    s.renderFade();
   }
 }

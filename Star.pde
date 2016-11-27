@@ -20,5 +20,11 @@ class Star
     stroke(c);
     point(pos.x, pos.y);
   }
-    
+  
+  void renderFade()
+  {
+    strokeWeight(2);
+    stroke(c_system_text.c);
+    point(pos.x, pos.y);
+  }
 }
