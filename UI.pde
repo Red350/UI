@@ -14,6 +14,7 @@ int state;
 int fadeVariable;
 int introGap = 10;
 boolean mouseLock = false;  // Prevents the mouse from being clicked during transitions
+boolean pausePlanets = false;
 
 // Planets
 ArrayList<Planet> planets;  
@@ -136,7 +137,10 @@ void draw()
   textSize(12);
   text(" State " + state + " x: "+mouseX+" y: "+mouseY+ " fps: " + frameRate, 10, 15);
   
-  updatePlanets();  // Update the planets every frame, even when not displayed
+  if(!pausePlanets)
+  {
+    updatePlanets();
+  }
   drawStars();
   
   switch(state)
