@@ -32,6 +32,7 @@ ColorHandler c_sun;
 ColorHandler c_system_purge;
 ColorHandler c_system_text;
 ColorHandler c_singleplanet;
+ColorHandler c_singleplanet_surface;
 ColorHandler c_debris;
 ColorHandler c_button;
 
@@ -91,6 +92,7 @@ void setup()
   c_system_purge = new ColorHandler(color(255,0,0,0));
   c_system_text = new ColorHandler(color(255,255,255,0));
   c_singleplanet = new ColorHandler(color(255,0,0,0));
+  c_singleplanet_surface = new ColorHandler(color(1,1,1,0));
   c_debris = new ColorHandler(color(255,0,0,0));
   c_button = new ColorHandler(color(0,255,255,0));
   
@@ -104,6 +106,7 @@ void setup()
   screen_system.add(c_system_purge);
   screen_system.add(c_system_text);
   screen_singleplanet.add(c_singleplanet);
+  screen_singleplanet.add(c_singleplanet_surface);
   screen_singleplanet.add(c_debris);
   screen_singleplanet.add(c_button);
   
@@ -153,12 +156,11 @@ void draw()
       }
       break;
     
-    // Draw planet view
+    // Draw system view
     case 2:
       drawStars();
       drawSystem();
-      mouseOverPlanets();  // Checks mouse is hovering over any planet
-      
+      mouseOverPlanets();
       break;
      
     // Transition from system view to single planet

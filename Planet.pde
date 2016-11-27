@@ -96,7 +96,7 @@ class Planet
     } 
   }
   
-  // Render a planet on it's own
+  // Render a large view of a single planet
   void renderLarge()
   {
     if (!purge)
@@ -112,7 +112,10 @@ class Planet
       
       // Draw half ellipses that move across the planets surface
       // to give the illusion of rotation
+      fill(c_singleplanet_surface.c);
+      println("Color is: " + c_singleplanet_surface.c);
       ellipse(centreX, centreY, largeSize, largeSize);
+      noFill();
       arc(centreX, centreY, largeSize-offset, largeSize, HALF_PI, PI + HALF_PI);
       for (int i = 0; i < largeSize; i+=100)
       {
@@ -125,9 +128,8 @@ class Planet
         }
       }
       
-      // Draw horizontal lines
-      // Sadly could not figure out how to calculate exactly what kind of arcs should be drawn,
-      // so had to resort to trial and error.
+      // Draw horizontal arcs, couldn't figure out how to calculate the exact length of the arcs mathematically
+      // so I figured it out using trial and error
       arc(centreX, centreY-largeSize/2, largeSize, fifthLs, QUARTER_PI+radians(12), PI-QUARTER_PI-radians(12));
       arc(centreX, centreY-largeSize/2+fifthLs, largeSize, fifthLs, QUARTER_PI-radians(15), PI-QUARTER_PI+radians(15));
       arc(centreX, centreY-largeSize/2+fifthLs*2, largeSize, fifthLs, QUARTER_PI-radians(35), PI-QUARTER_PI+radians(35));
