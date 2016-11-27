@@ -26,6 +26,7 @@ ArrayList<Star> stars;
 SysViewButton sysViewButton;
 PurgeButton purgeButton;
 PauseButton pauseButton;
+QuitButton quitButton;
 
 // Colours that need to be faded are made using the ColorHandler class
 ColorHandler c_intro_text;
@@ -114,7 +115,8 @@ void setup()
   // Initialise buttons
   sysViewButton = new SysViewButton(100, height-100, 100, 50, "SYSTEM VIEW", c_singleplanet_button);
   purgeButton = new PurgeButton(width-200, height-100, 100, 50, "PURGE", c_singleplanet_button);
-  pauseButton = new PauseButton(100, 100, 100, 50, "PAUSE", c_system_button);
+  pauseButton = new PauseButton(100, 20, 100, 50, "PAUSE", c_system_button);
+  quitButton = new QuitButton(width-200, 20, 100, 50, "LOG OUT", c_system_button);
   
   // Initialise intro text
   fileInput = loadStrings("debug.txt");
@@ -168,15 +170,14 @@ void draw()
     
     // Draw system view
     case 2:
-      //drawStars();
       drawSystem();
       mouseOverPlanets();
       pauseButton.update();
+      quitButton.update();
       break;
      
     // Transition from system view to single planet
     case 3:
-      //drawStars();
       drawSystem();
       drawSinglePlanet();
       if (fade())
@@ -188,7 +189,6 @@ void draw()
     
     // Single planet
     case 4:
-      //drawStars();
       drawSinglePlanet();
       sysViewButton.update();
       purgeButton.update();
@@ -196,7 +196,6 @@ void draw()
       
     // Transition from single planet to system view
     case 5:
-      //drawStars();
       drawSystem();
       drawSinglePlanet();
       if (fade())
@@ -204,6 +203,22 @@ void draw()
         state = 2;
         mouseLock = false;
       }
+      break;
+      
+    // Transition from system view to exit
+    case 6:
+      drawSystem();
+      drawExit();
+      if (fade())
+      {
+        state = 7;
+        mouseLock = false;
+      }
+      break;
+    
+    // Exit
+    case 7:
+      drawExit();
       break;
   }
 }
@@ -255,7 +270,14 @@ void mouseClicked()
     sysViewButton.clicked();
     purgeButton.clicked();
     pauseButton.clicked();
+    quitButton.clicked();
   }
+}
+
+void drawExit()
+{
+  fill(255);
+  ellipse(100,100,100,100);
 }
 
 void drawIntro()
@@ -298,6 +320,7 @@ void drawSystem()
   }
   sun.render();
   pauseButton.render();
+  quitButton.render();
 }
 
 void drawSinglePlanet()
