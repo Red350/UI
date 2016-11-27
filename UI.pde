@@ -52,6 +52,7 @@ ArrayList<ColorHandler> fadeOut;
 // Intro text
 String fileInput[];
 StringParser introText;
+StringParser exitText;
 PFont introFont;
 
 // Sounds
@@ -118,11 +119,17 @@ void setup()
   pauseButton = new PauseButton(100, 20, 100, 50, "PAUSE", c_system_button);
   quitButton = new QuitButton(width-200, 20, 100, 50, "LOG OUT", c_system_button);
   
-  // Initialise intro text
+  // Initialise intro text and fonts
   fileInput = loadStrings("debug.txt");
   if(fileInput == null)
     System.exit(1);
   introText = new StringParser(join(fileInput, "\n"));
+  introFont = createFont("starwars.ttf", 30, true);
+  fileInput = null;
+  fileInput = loadStrings("exit.txt");
+  if(fileInput == null)
+    System.exit(1);
+  exitText = new StringParser(join(fileInput, "\n"));
   introFont = createFont("starwars.ttf", 30, true);
   if(introFont == null)
     System.exit(1);
@@ -138,11 +145,12 @@ void setup()
 void draw()
 {
   background(0);
-  fill(255);
-  // show mouse coordinates
-  textAlign(LEFT, CENTER);
-  textSize(12);
-  text(" State " + state + " x: "+mouseX+" y: "+mouseY+ " fps: " + frameRate, 10, 15);
+
+  // Uncomment code below for debug info
+  //fill(255);
+  //textAlign(LEFT, CENTER);
+  //textSize(12);
+  //text(" State " + state + " x: "+mouseX+" y: "+mouseY+ " fps: " + frameRate, 10, 15);
   
   if(!pausePlanets)
   {
@@ -276,8 +284,20 @@ void mouseClicked()
 
 void drawExit()
 {
-  fill(255);
-  ellipse(100,100,100,100);
+  exitText.update();
+  noFill();
+  strokeWeight(1);
+  stroke(c_intro_text.c);
+  rect(introGap,introGap,width-introGap*2,height-introGap*2);
+  fill(c_intro_text.c);
+  textSize(30);
+  textAlign(LEFT,TOP);
+  textLeading(30);
+  text(exitText.toString(), introGap*2, introGap*2);
+  if(exitText.finished)
+  {
+    System.exit(0);
+  }
 }
 
 void drawIntro()

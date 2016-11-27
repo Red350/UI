@@ -10,7 +10,12 @@ class QuitButton extends Button
   {
     if(super.mouseOver)
     {
-      System.exit(0);
+      super.mouseOver = false;
+      mouseLock = true;
+      state = 6;
+      fadeIn = screen_intro;
+      fadeOut = screen_system;
+      fadeVariable = fadeSpeed;
     }
   }
 }
