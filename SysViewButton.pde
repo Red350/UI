@@ -9,6 +9,7 @@ class SysViewButton extends Button
   {
     if(super.mouseOver)
     {
+      super.clicked();
       super.mouseOver = false;  // Clear mouseOver flag to prevent it from being clicked again
       mouseLock = true;
       state = 5;  // Transition from single planet to system view

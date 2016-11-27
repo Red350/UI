@@ -4,6 +4,7 @@ class Button
   String text;
   int cornerRad = 10;
   boolean mouseOver = false;
+  boolean soundPlayed = false;
   ColorHandler cHandler;
   
   Button(int x, int y, int w, int h, String text, ColorHandler cHandler)
@@ -39,6 +40,24 @@ class Button
   
   void update()
   {
-    mouseOver = (mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h);
+    if(mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h)
+    {
+      if(soundPlayed == false)
+      {
+        mouseOverSound.play();
+        soundPlayed = true;
+      }
+      mouseOver = true;
+    }
+    else
+    {
+      mouseOver = false;
+      soundPlayed = false;
+    }
+  }
+  
+  void clicked()
+  {
+    buttonClickSound.play();
   }
 }

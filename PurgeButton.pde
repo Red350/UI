@@ -10,6 +10,7 @@ class PurgeButton extends Button
   {
     if(super.mouseOver)
     {
+      super.clicked();
       if(clickedPlanet.purge == false)
       {
         clickedPlanet.purge();

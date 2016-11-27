@@ -12,6 +12,7 @@ class Planet
   float purgeX, purgeY;
   float ghostArcLength = PI / 8;
   Debris purgeDebris[];
+  boolean soundPlayed = false;
   
   Planet(String name, int distance, float speed)
   {
@@ -35,12 +36,23 @@ class Planet
       mouseOver = dist(mouseX, mouseY, x, y) < size ? true : false;
      else
        mouseOver = dist(mouseX, mouseY, purgeX, purgeY) < size ? true : false;
+       
+     if(mouseOver && !soundPlayed)
+     {
+       mouseOverSound.play();
+       soundPlayed = true;
+     }
+     if(!mouseOver)
+     {
+       soundPlayed = false;
+     }
   }
   
   void clicked()
   {
     if (mouseOver)
       {
+        buttonClickSound.play();
         mouseLock = true;
         // Clear mouseOver flag to prevent it from being clicked again
         mouseOver = false;
@@ -157,6 +169,7 @@ class Planet
       d = new Debris(centreX, centreY,random(-speed,+speed),random(-speed,+speed),random(0,PI/32), (int)random(180,240));
       purgeDebris[i] = d;
     }
+    explosionSound.play();
   }
   
   void update()

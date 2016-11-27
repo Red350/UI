@@ -10,6 +10,7 @@ class PauseButton extends Button
   {
     if(super.mouseOver)
     {
+      super.clicked();
       pausePlanets = !pausePlanets;
     }
   }

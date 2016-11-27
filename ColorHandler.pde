@@ -12,18 +12,30 @@ class ColorHandler
     this.c = c;
   }
   
-  // Set the alpha value of a colour
+  /* The four methods below can set the rgb or alpha value of a colour */
+  
   void setAlpha(int alpha)
   {
-    
-    c &= 0x00FFFFFF;  // Clears the first 2 bytes of the number
-    c |= alpha << 24; // Sets the first 2 bytes to the value alpha 
+    c &= 0x00FFFFFF;
+    c |= alpha << 24; 
   }
   
   void setRed(int red)
   {
-    c &= 0xFF00FFFF;  // Clears the first 2 bytes of the number
-    c |= red << 16;   // Sets the first 2 bytes to the value red
+    c &= 0xFF00FFFF;
+    c |= red << 16;
+  }
+  
+  void setGreen(int green)
+  {
+    c &= 0xFFFF00FF;
+    c |= green << 8;
+  }
+  
+  void setBlue(int blue)
+  {
+    c &= 0xFFFFFF00;
+    c |= blue;
   }
   
   /* The methods below are currently unused.

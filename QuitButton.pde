@@ -10,6 +10,7 @@ class QuitButton extends Button
   {
     if(super.mouseOver)
     {
+      super.clicked();
       super.mouseOver = false;
       mouseLock = true;
       state = 6;

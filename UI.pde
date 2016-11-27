@@ -57,6 +57,9 @@ PFont introFont;
 
 // Sounds
 SoundFile bgMusic;
+SoundFile explosionSound;
+SoundFile mouseOverSound;
+SoundFile buttonClickSound;
 
 void setup()
 {
@@ -124,19 +127,31 @@ void setup()
   if(fileInput == null)
     System.exit(1);
   introText = new StringParser(join(fileInput, "\n"));
-  introFont = createFont("starwars.ttf", 30, true);
+  
   fileInput = null;
   fileInput = loadStrings("exit.txt");
   if(fileInput == null)
     System.exit(1);
   exitText = new StringParser(join(fileInput, "\n"));
+  
   introFont = createFont("starwars.ttf", 30, true);
   if(introFont == null)
     System.exit(1);
   textFont(introFont);
   
   // Initialise sounds
-  bgMusic = new SoundFile(this, "deepspace.mp3");
+  explosionSound = new SoundFile(this, "sounds\\muffled-distant-explosion.wav");
+  if(explosionSound == null)
+    System.exit(1);
+  mouseOverSound = new SoundFile(this, "sounds\\sci-fi-button-beep.wav");
+  if(mouseOverSound == null)
+    System.exit(1);
+  mouseOverSound.amp(0.5);
+  buttonClickSound = new SoundFile(this, "sounds\\click.wav");
+  if(buttonClickSound == null)
+    System.exit(1);
+  buttonClickSound.amp(0.1);
+  bgMusic = new SoundFile(this, "sounds\\deepspace.mp3");
   if(bgMusic == null)
     System.exit(1);
    bgMusic.loop();
@@ -229,7 +244,8 @@ void draw()
       drawExit();
       break;
   }
-}
+  //saveFrame("C:\\Users\\Red\\Dropbox\\College\\OOP\\Assignment\\UI\\screenshots\\test-#####.tif");
+}  
 
 // Fades colours in or out depending on the
 // contents of the two global colour array lists
@@ -251,7 +267,6 @@ boolean fade()
   }
   else
   {
-    // Clear the fade arrays
     return true;
   }
 }

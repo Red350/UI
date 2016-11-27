@@ -44,8 +44,6 @@ class Debris
       translate(pos.x, pos.y);
       rotate(theta);
       line(0, -size/2, 0, size/2);
-      //line(pos.x,pos.y, pos.x + size, pos.y + size);
-      //line(pos.x,pos.y, pos.x + cos(theta)*size, pos.y - sin(theta)*size);
       popMatrix();
     }  
   }
