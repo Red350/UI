@@ -76,13 +76,15 @@ void setup()
   
   fadeVariable = fadeSpeed;
   
-  // Initialise planets
-  Planet p;
+  // Initialise planets, sun and star
   planets = new ArrayList<Planet>();
-  p = new Planet("Tatooine", 200, 0.01);
-  planets.add(p);
-  p = new Planet("Alderaan", 300, 0.001);
-  planets.add(p);
+  Table t = loadTable("planets.csv", "header");
+  for(TableRow row : t.rows())
+  {
+    Planet p = new Planet(row.getString("name"), row.getInt("distance"), row.getFloat("speed"));
+    planets.add(p);
+  }
+  
   sun = new Sun(centreX, centreY);
   stars = new ArrayList<Star>();
   for(int i = 0; i < 1000; i++)
