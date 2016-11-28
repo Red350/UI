@@ -9,7 +9,7 @@ NOTE: If you're running the program several times, replace intro.txt with a blan
 ### Intro
 I planned very early for my UI to be based on a solar system. I created an [experimental project](https://github.com/Red350/Solar_system_experiment) in the first few weeks of the module, which consisted of a solar system simulation that could be sped up, slowed down, and even reversed. I ended up starting completely from scratch with the actual assingnment, though I learned a lot from that which I applied to the current version.
 
-This UI is loosely inspired by Star Wars, mostly just the names and the idea of blowing up planets. It's intended to be part of a spaceship, sort of a projection onto a window looking out into space.
+This UI is loosely inspired by Star Wars, mostly just the names and the idea of blowing up planets. It's intended to be part of a ship/deathstar, sort of a projection onto a window looking out into space.
 
 ### String Parser
 To give the illusion of typed text, I wrote a string parsing class. It effectively prints characters to the screen at a set rate, but also adds the functionality of delay and backspace.
@@ -24,6 +24,9 @@ Colours in processing are not objects, they are simply 32 bit integers, with eac
 I wrote a colour handler class that can be used to set the rgb or alpha of a colour to a specific value. It uses bit operations on a processing color value to clear the relevant bits and then set them to the new value.
 
 Each screen has an associated ColorHandler array that stores any colour used for that screen. When fading, there are two other arrays, fadeIn and fadeOut, which unsurprisingly point to the respective arrays to be faded in and out.
+
+### Sun
+-Using sin waves
 
 ## Asset Credits
 

@@ -1,15 +1,17 @@
-/* Class that parses a string and updates another string to give
+/* Class that parses an input string and updates a display string to give
    it the appearance of being typed.
    
-   Regular characters are added to the typed string every 5 frames.
-   The backspace character '\b' must be manually parsed as java
-   tries to output it as a character rather than removing a character
-   from the string.
-   '\t' is used to add a delay between characters being typed, during which
-   the cursor prompt will flash. The delay is set by the 2 characters following
-   the the '\t' character e.g. "\t20".
+   Regular characters are added to the display string every 5 frames.
+   
+   The '$' character is used to make it appear as if text is being backspaced.
+   Anytime a '$' is parsed, a character is removed from the display string.
+   
+   The '^' symbol, followed by two numbers, e.g. "^10" is used to make the terminal
+   wait before adding more characters to the display string. During this wait time
+   an underscore is added and removed from the display string to make it look like
+   the cursor is flashing, waiting for input.
    The delay number must be even, and the delay time is equivalent to half the
-   delay time in seconds, so "\t20" would wait for 10 seconds.
+   delay number in seconds, so "^10" would wait for 5 seconds.
 */
 
 class StringParser

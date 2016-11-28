@@ -1,3 +1,4 @@
+/* Button super class that all other buttons inherit from */
 class Button
 {
   int x, y, w, h;

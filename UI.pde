@@ -166,7 +166,7 @@ void setup()
   bgMusic = new SoundFile(this, "sounds\\deepspace.mp3");
   if(bgMusic == null)
     System.exit(1);
-   bgMusic.loop();
+  bgMusic.loop();
 }
 
 void draw()
@@ -174,10 +174,10 @@ void draw()
   background(0);
 
   // Uncomment code below for debug info
-  //fill(255);
-  //textAlign(LEFT, CENTER);
-  //textSize(12);
-  //text(" State " + state + " x: "+mouseX+" y: "+mouseY+ " fps: " + frameRate, 10, 15);
+  fill(255);
+  textAlign(LEFT, CENTER);
+  textSize(12);
+  text(" State " + state + " x: "+mouseX+" y: "+mouseY+ " fps: " + (int)frameRate, 10, 15);
   
   if(!pausePlanets)
   {
@@ -194,7 +194,6 @@ void draw()
     
     // Transition from intro to system view
     case 1:
-      //drawStarsFadeIn();
       drawIntro();
       drawSystem();
       if(fade())

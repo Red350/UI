@@ -6,7 +6,7 @@ class Sun
   float rotation = 0;
   float d = 100;  // distance from any one dot to the centre of the sun
   int numPeaks = 20;
-  int numSatellites = 200;
+  int numSatellites = 150;
   int satelliteSize = 2;
   int direction = 1;
   int speed = 5;
@@ -25,7 +25,7 @@ class Sun
     for(int i = 0; i < numSatellites; i++)
     {
       temp += TWO_PI/numSatellites*numPeaks;
-      d = sin(temp)*10+50;
+      d = sin(temp)*5+40;
       ellipse(x + cos(theta) * d, y - sin(theta) * d, satelliteSize, satelliteSize);
       
       theta = theta + TWO_PI/numSatellites;

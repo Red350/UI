@@ -28,7 +28,7 @@ class Debris
     // for the next time it is needed.
     if(aliveTime < 60 && aliveTime >= -1)
     {
-      c_debris.setRed((int)map(aliveTime, 60, 0, 255, 0));
+      c_debris.setAlpha((int)map(aliveTime, 60, 0, 255, 0));
     }
     
     aliveTime--;

@@ -1,8 +1,11 @@
-// Wrapper class for color
-// Since color is just int, we can't make references to it,
-// which this class fixes.
-// The alpha value is stored in the 8 most significant bits of
-// the color variable, so bit operations are required to manipulate it.
+/* Wrapper class for color.
+ * Since color's are just ints, there are no in-built methods to alter them.
+ * This class contains methods to individually change the rgb and alpha values of a color.
+ *
+ * The byte layout of colors is AARRGGBB. To change part of a color, the two relevant bytes
+ * must be cleared using logical AND, then written with the new value by bit shifting it and
+ * storing it with logical OR.
+ */
 class ColorHandler
 {
   color c;
@@ -12,7 +15,8 @@ class ColorHandler
     this.c = c;
   }
   
-  /* The four methods below can set the rgb or alpha value of a colour */
+  // The four methods below can set the rgb or alpha value of a colour.
+  // All of them require bit manipulation to first clear t
   
   void setAlpha(int alpha)
   {

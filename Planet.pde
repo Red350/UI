@@ -1,3 +1,8 @@
+/* Class which represents a single planet in the system.
+ * There are two render methods in this class, one for 
+ * when the planet is part of the system view and another
+ * for when it's being viewed on its own.
+ */
 class Planet
 {
   String name;
@@ -24,7 +29,7 @@ class Planet
     size = 20;  // All planets currently represented as the same size
     largeSize = 700;
     fifthLs = largeSize / 5; // This is used to calculate the horizontal lines on the large planet
-    mouseOver = false;  // Check if the mouse is over the planet
+    mouseOver = false;
     purgeDebris = new Debris[100];
     
     update();  // Call update once to set planet location
