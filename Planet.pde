@@ -111,9 +111,12 @@ class Planet
   // Render a large view of a single planet
   void renderLarge()
   {
+    fill(c_singleplanet_text.c);
+    textAlign(CENTER, CENTER);
+    textSize(40);
+    text(name, centreX, 100);
     if (!purge)
     {
-      noFill();
       stroke(c_singleplanet.c);
       strokeWeight(2);
       offset++;
@@ -140,7 +143,7 @@ class Planet
       }
       
       // Draw horizontal arcs, couldn't figure out how to calculate the exact length of the arcs mathematically
-      // so I figured it out using trial and error
+      // so I resorted to trial and error
       arc(centreX, centreY-largeSize/2, largeSize, fifthLs, QUARTER_PI+radians(12), PI-QUARTER_PI-radians(12));
       arc(centreX, centreY-largeSize/2+fifthLs, largeSize, fifthLs, QUARTER_PI-radians(15), PI-QUARTER_PI+radians(15));
       arc(centreX, centreY-largeSize/2+fifthLs*2, largeSize, fifthLs, QUARTER_PI-radians(35), PI-QUARTER_PI+radians(35));

@@ -16,6 +16,7 @@ class SysViewButton extends Button
       fadeIn = screen_system;
       fadeOut = screen_singleplanet;
       fadeVariable = fadeSpeed;
+      
     }
   }
 }

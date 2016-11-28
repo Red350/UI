@@ -35,6 +35,7 @@ class Button
       fill(cHandler.c);
       
     textAlign(CENTER, CENTER);
+    textSize(12);
     text(text, x + w/2, y + h/2);
   }
   

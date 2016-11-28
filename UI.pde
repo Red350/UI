@@ -27,6 +27,7 @@ SysViewButton sysViewButton;
 PurgeButton purgeButton;
 PauseButton pauseButton;
 QuitButton quitButton;
+ArrayList<Button> buttons;
 
 // Colours that need to be faded are made using the ColorHandler class
 ColorHandler c_intro_text;
@@ -37,6 +38,7 @@ ColorHandler c_system_text;
 ColorHandler c_system_button;
 ColorHandler c_singleplanet;
 ColorHandler c_singleplanet_surface;
+ColorHandler c_singleplanet_text;
 ColorHandler c_debris;
 ColorHandler c_singleplanet_button;
 
@@ -63,7 +65,7 @@ SoundFile buttonClickSound;
 
 void setup()
 {
-  size(800,800);
+  size(1000,1000);
   frameRate(60);
   
   // Centre of the planet system
@@ -98,6 +100,7 @@ void setup()
   c_system_button = new ColorHandler(color(0,255,255,0));
   c_singleplanet = new ColorHandler(color(255,0,0,0));
   c_singleplanet_surface = new ColorHandler(color(50,0,0,0));
+  c_singleplanet_text = new ColorHandler(color(255,255,255,0));
   c_debris = new ColorHandler(color(255,0,0,0));
   c_singleplanet_button = new ColorHandler(color(0,255,255,0));
   
@@ -113,6 +116,7 @@ void setup()
   screen_system.add(c_system_button);
   screen_singleplanet.add(c_singleplanet);
   screen_singleplanet.add(c_singleplanet_surface);
+  screen_singleplanet.add(c_singleplanet_text);
   screen_singleplanet.add(c_debris);
   screen_singleplanet.add(c_singleplanet_button);
   
@@ -121,6 +125,12 @@ void setup()
   purgeButton = new PurgeButton(width-200, height-100, 100, 50, "PURGE", c_singleplanet_button);
   pauseButton = new PauseButton(100, 20, 100, 50, "PAUSE", c_system_button);
   quitButton = new QuitButton(width-200, 20, 100, 50, "LOG OUT", c_system_button);
+  
+  buttons = new ArrayList<Button>();
+  buttons.add(sysViewButton);
+  buttons.add(purgeButton);
+  buttons.add(pauseButton);
+  buttons.add(quitButton);
   
   // Initialise intro text and fonts
   fileInput = loadStrings("debug.txt");
@@ -289,11 +299,11 @@ void mouseClicked()
     for (Planet p : planets)
     {
       p.clicked();
-    } 
-    sysViewButton.clicked();
-    purgeButton.clicked();
-    pauseButton.clicked();
-    quitButton.clicked();
+    }
+    for (Button b : buttons)
+    {
+      b.clicked();
+    }
   }
 }
 
