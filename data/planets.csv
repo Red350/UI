@@ -1,4 +1,6 @@
 name,distance,speed
-Tatooine,200,0.01
-Alderaan,300,0.001
-Test,400,0.5
+Tatooine,100,0.001
+Alderaan,175,0.002
+Hoth,250,0.003
+Bespin,325,0.004
+Yavin,400,0.005
