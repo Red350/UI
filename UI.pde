@@ -135,7 +135,7 @@ void setup()
   buttons.add(quitButton);
   
   // Initialise intro text and fonts
-  fileInput = loadStrings("debug.txt");
+  fileInput = loadStrings("intro.txt");
   if(fileInput == null)
     System.exit(1);
   introText = new StringParser(join(fileInput, "\n"));
@@ -146,7 +146,7 @@ void setup()
     System.exit(1);
   exitText = new StringParser(join(fileInput, "\n"));
   
-  introFont = createFont("starwars.ttf", 30, true);
+  introFont = createFont("STARWARS.TTF", 30, true);
   if(introFont == null)
     System.exit(1);
   textFont(introFont);
@@ -174,10 +174,10 @@ void draw()
   background(0);
 
   // Uncomment code below for debug info
-  fill(255);
-  textAlign(LEFT, CENTER);
-  textSize(12);
-  text(" State " + state + " x: "+mouseX+" y: "+mouseY+ " fps: " + (int)frameRate, 10, 15);
+  //fill(255);
+  //textAlign(LEFT, CENTER);
+  //textSize(12);
+  //text(" State " + state + " x: "+mouseX+" y: "+mouseY+ " fps: " + (int)frameRate, 10, 15);
   
   if(!pausePlanets)
   {

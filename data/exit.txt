@@ -1,1 +1,2 @@
-^04Logging out...^04
+^02Logging out...^04
+Goodbye^02

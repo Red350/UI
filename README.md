@@ -28,6 +28,9 @@ Each screen has an associated ColorHandler array that stores any colour used for
 ### Sun
 -Using sin waves
 
+### Large planet
+Arcs
+
 ## Asset Credits
 
 ### Font

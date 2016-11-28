@@ -167,9 +167,6 @@ class Planet
   
   void purge()
   {
-    if(name.equals("Death Star")){
-      System.exit(0);
-    }
     purge = true;
     purgeX = x;
     purgeY = y;
