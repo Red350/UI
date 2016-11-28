@@ -1,6 +1,7 @@
-name,distance,speed
-Tatooine,100,0.001
-Alderaan,175,0.002
-Hoth,250,0.003
-Bespin,325,0.004
-Yavin,400,0.005
+name,distance,speed,theta
+Tatooine,100,0.001,0.2
+Alderaan,175,0.002,1.6
+Hoth,250,0.003,3,5
+Bespin,325,0.004,1.2
+Yavin,400,0.005,4.8
+Death Star,475,0.006,2.2

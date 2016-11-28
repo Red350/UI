@@ -14,13 +14,13 @@ class Planet
   Debris purgeDebris[];
   boolean soundPlayed = false;
   
-  Planet(String name, int distance, float speed)
+  Planet(String name, int distance, float speed, float theta)
   {
     this.name = name;
     this.distance = distance;
     this.speed = speed;
+    this.theta = theta;
     
-    theta = 0;  // start all planets at the same angle
     size = 20;  // All planets currently represented as the same size
     largeSize = 700;
     fifthLs = largeSize / 5; // This is used to calculate the horizontal lines on the large planet
@@ -162,6 +162,9 @@ class Planet
   
   void purge()
   {
+    if(name.equals("Death Star")){
+      System.exit(0);
+    }
     purge = true;
     purgeX = x;
     purgeY = y;

@@ -81,7 +81,7 @@ void setup()
   Table t = loadTable("planets.csv", "header");
   for(TableRow row : t.rows())
   {
-    Planet p = new Planet(row.getString("name"), row.getInt("distance"), row.getFloat("speed"));
+    Planet p = new Planet(row.getString("name"), row.getInt("distance"), row.getFloat("speed"), row.getFloat("theta"));
     planets.add(p);
   }
   
