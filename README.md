@@ -6,6 +6,12 @@ Student Number: C15755659
 ## Video
 [![Video](http://img.youtube.com/vi/DzMRd3_q96k/0.jpg)](http://www.youtube.com/watch?v=DzMRd3_q96k)
 
+## Screenshots
+![System](screenshots/system.png)
+![Large](screenshots/largeplanet.png)
+![Explode](screenshots/explode.png)
+![Purged System](screenshots/purged_system.png)
+
 ## Description
 NOTE: If you're running the program several times, replace intro.txt with a blank text file to avoid having to wait through the opening sequence each time.
 
