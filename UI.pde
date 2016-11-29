@@ -77,15 +77,10 @@ void setup()
   size(1000,1000);
   frameRate(60);
   
-  // Centre of the planet system
   centreX = width/2;
   centreY = height/2;
-  
-  state = 0;  // Default planet view
-  
-  fadeCountdown = fadeDuration;
-  
-  // Initialise planets, sun and star
+  state = 0;
+    
   planets = new ArrayList<Planet>();
   Table t = loadTable("planets.csv", "header");
   for(TableRow row : t.rows())
@@ -95,6 +90,7 @@ void setup()
   }
   
   sun = new Sun(centreX, centreY);
+  
   stars = new ArrayList<Star>();
   for(int i = 0; i < 1000; i++)
   {
@@ -102,80 +98,10 @@ void setup()
     stars.add(s);
   }
   
-  // Initialise colours
-  c_intro_text = new ColorHandler(color(192,192,192,255));
-  c_system = new ColorHandler(color(0,255,0,0));
-  c_sun = new ColorHandler(color(255,255,0,0));
-  c_system_purge = new ColorHandler(color(255,0,0,0));
-  c_system_text = new ColorHandler(color(255,255,255,0));
-  c_system_button = new ColorHandler(color(0,255,255,0));
-  c_singleplanet = new ColorHandler(color(255,0,0,0));
-  c_singleplanet_surface = new ColorHandler(color(50,0,0,0));
-  c_singleplanet_text = new ColorHandler(color(255,255,255,0));
-  c_debris = new ColorHandler(color(255,0,0,0));
-  c_singleplanet_button = new ColorHandler(color(0,255,255,0));
-  
-  screen_intro = new ArrayList<ColorHandler>();
-  screen_system = new ArrayList<ColorHandler>();
-  screen_singleplanet = new ArrayList<ColorHandler>();
-  
-  screen_intro.add(c_intro_text);
-  screen_system.add(c_system);
-  screen_system.add(c_sun);
-  screen_system.add(c_system_purge);
-  screen_system.add(c_system_text);
-  screen_system.add(c_system_button);
-  screen_singleplanet.add(c_singleplanet);
-  screen_singleplanet.add(c_singleplanet_surface);
-  screen_singleplanet.add(c_singleplanet_text);
-  screen_singleplanet.add(c_debris);
-  screen_singleplanet.add(c_singleplanet_button);
-  
-  // Initialise buttons
-  sysViewButton = new SysViewButton(100, height-100, 100, 50, "SYSTEM VIEW", c_singleplanet_button);
-  purgeButton = new PurgeButton(width-200, height-100, 100, 50, "PURGE", c_singleplanet_button);
-  pauseButton = new PauseButton(100, 20, 100, 50, "PAUSE", c_system_button);
-  quitButton = new QuitButton(width-200, 20, 100, 50, "LOG OUT", c_system_button);
-  
-  buttons = new ArrayList<Button>();
-  buttons.add(sysViewButton);
-  buttons.add(purgeButton);
-  buttons.add(pauseButton);
-  buttons.add(quitButton);
-  
-  // Initialise intro text and fonts
-  fileInput = loadStrings("intro.txt");
-  if(fileInput == null)
-    System.exit(1);
-  introText = new StringParser(join(fileInput, "\n"));
-  
-  fileInput = null;
-  fileInput = loadStrings("exit.txt");
-  if(fileInput == null)
-    System.exit(1);
-  exitText = new StringParser(join(fileInput, "\n"));
-  
-  introFont = createFont("STARWARS.TTF", 30, true);
-  if(introFont == null)
-    System.exit(1);
-  textFont(introFont);
-  
-  // Initialise sounds
-  explosionSound = new SoundFile(this, "sounds\\muffled-distant-explosion.wav");
-  if(explosionSound == null)
-    System.exit(1);
-  mouseOverSound = new SoundFile(this, "sounds\\sci-fi-button-beep.wav");
-  if(mouseOverSound == null)
-    System.exit(1);
-  mouseOverSound.amp(0.5);
-  buttonClickSound = new SoundFile(this, "sounds\\click.wav");
-  if(buttonClickSound == null)
-    System.exit(1);
-  buttonClickSound.amp(0.1);
-  bgMusic = new SoundFile(this, "sounds\\deepspace.mp3");
-  if(bgMusic == null)
-    System.exit(1);
-  bgMusic.loop();
+  initialiseColors();
+  initialiseButtons();
+  initialiseFonts();
+  initialiseSounds();  
 }
 
 void draw()
@@ -397,5 +323,83 @@ void drawStars()
 
 void initialiseColors()
 {
+  c_intro_text = new ColorHandler(color(192,192,192,255));
+  c_system = new ColorHandler(color(0,255,0,0));
+  c_sun = new ColorHandler(color(255,255,0,0));
+  c_system_purge = new ColorHandler(color(255,0,0,0));
+  c_system_text = new ColorHandler(color(255,255,255,0));
+  c_system_button = new ColorHandler(color(0,255,255,0));
+  c_singleplanet = new ColorHandler(color(255,0,0,0));
+  c_singleplanet_surface = new ColorHandler(color(50,0,0,0));
+  c_singleplanet_text = new ColorHandler(color(255,255,255,0));
+  c_debris = new ColorHandler(color(255,0,0,0));
+  c_singleplanet_button = new ColorHandler(color(0,255,255,0));
   
+  screen_intro = new ArrayList<ColorHandler>();
+  screen_system = new ArrayList<ColorHandler>();
+  screen_singleplanet = new ArrayList<ColorHandler>();
+  
+  screen_intro.add(c_intro_text);
+  screen_system.add(c_system);
+  screen_system.add(c_sun);
+  screen_system.add(c_system_purge);
+  screen_system.add(c_system_text);
+  screen_system.add(c_system_button);
+  screen_singleplanet.add(c_singleplanet);
+  screen_singleplanet.add(c_singleplanet_surface);
+  screen_singleplanet.add(c_singleplanet_text);
+  screen_singleplanet.add(c_debris);
+  screen_singleplanet.add(c_singleplanet_button);
+}
+
+void initialiseButtons()
+{
+  sysViewButton = new SysViewButton(100, height-100, 100, 50, "SYSTEM VIEW", c_singleplanet_button);
+  purgeButton = new PurgeButton(width-200, height-100, 100, 50, "PURGE", c_singleplanet_button);
+  pauseButton = new PauseButton(100, 20, 100, 50, "PAUSE", c_system_button);
+  quitButton = new QuitButton(width-200, 20, 100, 50, "LOG OUT", c_system_button);
+  
+  buttons = new ArrayList<Button>();
+  buttons.add(sysViewButton);
+  buttons.add(purgeButton);
+  buttons.add(pauseButton);
+  buttons.add(quitButton);
+}
+
+void initialiseFonts()
+{
+  fileInput = loadStrings("intro.txt");
+  if(fileInput == null)
+    System.exit(1);
+  introText = new StringParser(join(fileInput, "\n"));
+  
+  fileInput = null;
+  fileInput = loadStrings("exit.txt");
+  if(fileInput == null)
+    System.exit(1);
+  exitText = new StringParser(join(fileInput, "\n"));
+  
+  introFont = createFont("STARWARS.TTF", 30, true);
+  if(introFont == null)
+    System.exit(1);
+  textFont(introFont);
+}
+
+void initialiseSounds()
+{
+  explosionSound = new SoundFile(this, "sounds\\muffled-distant-explosion.wav");
+  if(explosionSound == null)
+    System.exit(1);
+  mouseOverSound = new SoundFile(this, "sounds\\sci-fi-button-beep.wav");
+  if(mouseOverSound == null)
+    System.exit(1);
+  mouseOverSound.amp(0.5);
+  buttonClickSound = new SoundFile(this, "sounds\\click.wav");
+  if(buttonClickSound == null)
+    System.exit(1);
+  buttonClickSound.amp(0.1);
+  bgMusic = new SoundFile(this, "sounds\\deepspace.mp3");
+  if(bgMusic == null)
+    System.exit(1);
+  bgMusic.loop();
 }
