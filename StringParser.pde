@@ -43,7 +43,7 @@ class StringParser
       {
         c = inputString.charAt(i);
         
-        // Check if we're at a control character
+        // Check if we're at a wait character
         if(c == '^')
         {
           idleTime = Integer.parseInt(inputString.substring(i+1,i+3));
@@ -53,6 +53,7 @@ class StringParser
         {
           if (frameCount % 2 == 0)
           {
+            // Check if we're at a backspace character
             if(inputString.charAt(i) == '$')
             {
               displayString = displayString.substring(0,displayIndex-1);
@@ -60,6 +61,7 @@ class StringParser
             }
             else
             {
+              // Else just add the current character to the display string
               displayString = displayString + inputString.charAt(i);
               displayIndex++;
             }
@@ -75,6 +77,7 @@ class StringParser
         idleTime = 100;
       }
     }
+    // Toggles the underscore every 30 frames during the wait time
     else
     {
       if(frameCount % 30 == 0)

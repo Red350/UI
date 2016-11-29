@@ -1,3 +1,4 @@
+/* Button to returns to system view from large planet view */
 class SysViewButton extends Button
 {
   SysViewButton(int x, int y, int w, int h, String text, ColorHandler ch)
@@ -15,8 +16,7 @@ class SysViewButton extends Button
       state = 5;  // Transition from single planet to system view
       fadeIn = screen_system;
       fadeOut = screen_singleplanet;
-      fadeVariable = fadeSpeed;
-      
+      fadeCountdown = fadeDuration;    
     }
   }
 }

@@ -6,12 +6,12 @@
 import processing.sound.*;
 
 /* Constants */
-public static final int fadeSpeed = 30; // Number of frames over which a fade transition happens
+public static final int fadeDuration = 30; // Number of frames over which a fade transition happens
 public static final int numDebris = 100;  // Number of debris objects after a purge
 
 int centreX, centreY;
 int state;
-int fadeVariable;
+int fadeCountdown;
 int introGap = 10;
 boolean mouseLock = false;  // Prevents the mouse from being clicked during transitions
 boolean pausePlanets = false;
@@ -74,7 +74,7 @@ void setup()
   
   state = 0;  // Default planet view
   
-  fadeVariable = fadeSpeed;
+  fadeCountdown = fadeDuration;
   
   // Initialise planets, sun and star
   planets = new ArrayList<Planet>();
@@ -255,25 +255,24 @@ void draw()
       drawExit();
       break;
   }
-  //saveFrame("C:\\Users\\Red\\Dropbox\\College\\OOP\\Assignment\\UI\\screenshots\\test-#####.tif");
 }  
 
 // Fades colours in or out depending on the
-// contents of the two global colour array lists
+// contents of the two global ColorHandler array lists
 boolean fade()
 {
-  if (fadeVariable > 0)
+  if (fadeCountdown > 0)
   {
     // fade colours
     for(ColorHandler c : fadeOut)
     {
-      c.setAlpha((int)map(fadeVariable,0,fadeSpeed,0,255));
+      c.setAlpha((int)map(fadeCountdown,0,fadeDuration,0,255));
     }
     for(ColorHandler c : fadeIn)
     {
-      c.setAlpha((int)map(fadeVariable,0,fadeSpeed,255,0));
+      c.setAlpha((int)map(fadeCountdown,0,fadeDuration,255,0));
     }
-    fadeVariable--;
+    fadeCountdown--;
     return false;
   }
   else
@@ -282,8 +281,7 @@ boolean fade()
   }
 }
 
-// Calls mouseOver function for each planet
-// TODO: Make the planet mouseover function part of its update function
+// Calls mouseOver method for each planet
 void mouseOverPlanets()
 {
   for (Planet p: planets)
@@ -308,6 +306,7 @@ void mouseClicked()
   }
 }
 
+// Draws the outro before ending the program
 void drawExit()
 {
   exitText.update();
@@ -326,6 +325,7 @@ void drawExit()
   }
 }
 
+// Draw the intro text
 void drawIntro()
 {
   introText.update();
@@ -343,12 +343,12 @@ void drawIntro()
     introText.finished = false;
     fadeIn = screen_system;
     fadeOut = screen_intro;
-    fadeVariable = fadeSpeed;
+    fadeCountdown = fadeDuration;
     state = 1;
   }
 }
 
-// Function to update the position of the planets in the system view
+// Update the position of the planets in the system view
 void updatePlanets()
 {
   for (Planet p: planets)
@@ -357,7 +357,7 @@ void updatePlanets()
   }
 }
 
-// Function to draw the planets in the system view
+// Draw the planets in the system view
 void drawSystem()
 {
   for (Planet p: planets)
@@ -369,6 +369,7 @@ void drawSystem()
   quitButton.render();
 }
 
+// Draw a single large planet
 void drawSinglePlanet()
 {
   clickedPlanet.renderLarge();
@@ -376,18 +377,11 @@ void drawSinglePlanet()
   purgeButton.render();
 }
 
+// Draw the stars in the background
 void drawStars()
 {
   for(Star s : stars)
   {
     s.render();
-  }
-}
-
-void drawStarsFadeIn()
-{
-  for(Star s : stars)
-  {
-    s.renderFade();
   }
 }

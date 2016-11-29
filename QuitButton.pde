@@ -1,3 +1,4 @@
+/* Button to "Log out" */
 class QuitButton extends Button
 {
   
@@ -16,7 +17,7 @@ class QuitButton extends Button
       state = 6;
       fadeIn = screen_intro;
       fadeOut = screen_system;
-      fadeVariable = fadeSpeed;
+      fadeCountdown = fadeDuration;
     }
   }
 }

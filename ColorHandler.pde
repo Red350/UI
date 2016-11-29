@@ -15,8 +15,7 @@ class ColorHandler
     this.c = c;
   }
   
-  // The four methods below can set the rgb or alpha value of a colour.
-  // All of them require bit manipulation to first clear t
+  // The four methods below set the rgb or alpha value of a colour.
   
   void setAlpha(int alpha)
   {
@@ -46,9 +45,7 @@ class ColorHandler
      The original idea was to let the class worry about when the color
      had finished fading, but due to how bit operations work with signed
      numbers, I found this to be very difficult to get working.
-     The current implementation uses two global variables to fade in and out.
-     
-  */
+     The current implementation uses two global arrays to fade in and out. */
   
   // Takes a value n and adds it to the alpha value of the colour
   // n should be a value between 1 and 255

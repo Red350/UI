@@ -35,6 +35,7 @@ class Planet
     update();  // Call update once to set planet location
   }
   
+  // Checks mouseover on system view of a planet
   void mouseOver()
   {
     if(!purge)
@@ -53,6 +54,7 @@ class Planet
      }
   }
   
+  // Checks if clicked in system view
   void clicked()
   {
     if (mouseOver)
@@ -67,7 +69,7 @@ class Planet
         // In this case we are fading out the system and fading in large planet
         fadeOut = screen_system;
         fadeIn = screen_singleplanet;
-        fadeVariable = fadeSpeed;
+        fadeCountdown = fadeDuration;
       }
   }
   
@@ -165,6 +167,7 @@ class Planet
     }
   }
   
+  // Creates debris when the purge button is clicked
   void purge()
   {
     purge = true;

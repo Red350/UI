@@ -1,3 +1,4 @@
+/* Button to blow up a planet */
 class PurgeButton extends Button
 {
   
