@@ -37,45 +37,6 @@ Every screen transition fades the old screen out and the new screen in, which po
 Colours in processing are not objects, they are simply 32 bit integers, with 2 bytes each referring to the alpha and RGB values of the colour in the following format: AARRGGBB. This made fading colours in and out a bit more complicated than I thought it would be.
 
 I wrote a colour handler class that can be used to set the rgb or alpha of a colour to a specific value. It uses bit operations on a processing color value to clear the relevant bits and then set them to the new value.
-# Assignment for OOP: Sci-Fi UI
-Name: Pádraig Redmond
-
-Student Number: C15755659
-
-## Video
-[![Video](http://img.youtube.com/vi/DzMRd3_q96k/0.jpg)](http://www.youtube.com/watch?v=DzMRd3_q96k)
-
-## Screenshots
-### System view
-![System](screenshots/system.png)
-### Large planet view
-![Large](screenshots/largeplanet.png)
-### Exploding planet
-![Explode](screenshots/explode.png)
-### System post-purge
-![Purged System](screenshots/purged_system.png)
-
-## Description
-NOTE: If you're running the program several times, replace intro.txt with a blank text file to avoid having to wait through the opening sequence each time.
-
-### Introduction
-I planned very early for my UI to be based on a solar system. I created an [experimental project](https://github.com/Red350/Solar_system_experiment) in the first few weeks of the module, which consisted of a solar system simulation that could be sped up, slowed down, and even reversed. I ended up starting completely from scratch with the actual assingnment, though I learned a lot from that which I applied to the current version.
-
-This UI is loosely inspired by Star Wars, mostly just the names and the idea of blowing up planets. It's intended to be a computer system on the death star, with the screen being a window out to space, which is why there are always stars visible in the background.
-
-### String Parser
-To give the illusion of typed text, I wrote a string parsing class. It effectively prints characters to the screen at a set rate, but also adds the functionality of delay and backspace.
-
-The '^' symbol, followed by two numbers, e.g. "^10" is used to make the terminal wait before adding more characters to the display string. During this wait time an underscore is added and removed from the display string to make it look like the cursor is flashing, waiting for input. The delay number must be even, and the delay time is equivalent to half the delay number in seconds, so "^10" would wait for 5 seconds.
-
-A '$' character is interpreted as a backspace, and will clear text already printed to the screen.
-
-### Colour Fade
-Every screen transition fades the old screen out and the new screen in, which posed a bit of a challenge due to how processing handles colours.
-
-Colours in processing are not objects, they are simply 32 bit integers, with 2 bytes each referring to the alpha and RGB values of the colour in the following format: AARRGGBB. This made fading colours in and out a bit more complicated than I thought it would be.
-
-I wrote a colour handler class that can be used to set the rgb or alpha of a colour to a specific value. It uses bit operations on a processing color value to clear the relevant bits and then set them to the new value.
 
 Each screen has an associated ColorHandler array that stores any colour used for that screen. When fading, there are two other arrays, fadeIn and fadeOut, which unsurprisingly point to the respective arrays to be faded in and out.
 
