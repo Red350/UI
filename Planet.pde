@@ -1,4 +1,4 @@
-/* Class which represents a single planet in the system.
+/* Represents a single planet in the system.
  * There are two render methods in this class, one for 
  * when the planet is part of the system view and another
  * for when it's being viewed on its own.
