@@ -12,16 +12,18 @@ NOTE: If you're running the program several times, replace intro.txt with a blan
 ### Intro
 I planned very early for my UI to be based on a solar system. I created an [experimental project](https://github.com/Red350/Solar_system_experiment) in the first few weeks of the module, which consisted of a solar system simulation that could be sped up, slowed down, and even reversed. I ended up starting completely from scratch with the actual assingnment, though I learned a lot from that which I applied to the current version.
 
-This UI is loosely inspired by Star Wars, mostly just the names and the idea of blowing up planets. It's intended to be part of a ship/deathstar, sort of a projection onto a window looking out into space.
+This UI is loosely inspired by Star Wars, mostly just the names and the idea of blowing up planets. It's intended to be part of a ship/deathstar, sort of a projection onto a window looking out into space, hence the static star background.
 
 ### String Parser
 To give the illusion of typed text, I wrote a string parsing class. It effectively prints characters to the screen at a set rate, but also adds the functionality of delay and backspace.
 
-A '^' character followed by 2 numbers will cause the cursor to flash on and off equal to the number given, making it seem like the terminal is waiting.
+The '^' symbol, followed by two numbers, e.g. "^10" is used to make the terminal wait before adding more characters to the display string. During this wait time an underscore is added and removed from the display string to make it look like the cursor is flashing, waiting for input. The delay number must be even, and the delay time is equivalent to half the delay number in seconds, so "^10" would wait for 5 seconds.
 
 A '$' character is interpreted as a backspace, and will clear text already printed to the screen.
 
 ### Colour Fade
+Every screen transition fades the old screen out and the new screen in, which posed a bit of a challenge due to how processing handles colours.
+
 Colours in processing are not objects, they are simply 32 bit integers, with each 2 bytes referring to the rgb and alpha values of the colour. This made fading colours in and out a bit more complicated than I thought it would be.
 
 I wrote a colour handler class that can be used to set the rgb or alpha of a colour to a specific value. It uses bit operations on a processing color value to clear the relevant bits and then set them to the new value.
@@ -32,7 +34,9 @@ Each screen has an associated ColorHandler array that stores any colour used for
 -Using sin waves
 
 ### Large planet
-Arcs
+The large planet view is intended to give the illusion of a 3d rotating planet, using only 2d drawing.
+
+The rotation consists of arcs, all of which have a centre point at the centre of the planet and end points at each of the poles. The arcs either shrink or grow their width by 1 pixel every frame depending on which side of the planet they are on. After 100 frames, they move back to their starting position and begin moving over the same 100 pixel range again. Since they are all spaced by 100 pixels, and as they all move at the same time, it gives the illusion that each arc travels the full width of the planet, though this is not the case.
 
 ## Asset Credits
 
