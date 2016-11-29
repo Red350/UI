@@ -7,9 +7,9 @@ Student Number: C15755659
 [![Video](http://img.youtube.com/vi/DzMRd3_q96k/0.jpg)](http://www.youtube.com/watch?v=DzMRd3_q96k)
 
 ## Description
-NOTE: If you're running the program several times, replace intro.txt with a blank text file to avoid having to wait through the intro each time.
+NOTE: If you're running the program several times, replace intro.txt with a blank text file to avoid having to wait through the opening sequence each time.
 
-### Intro
+### Introduction
 I planned very early for my UI to be based on a solar system. I created an [experimental project](https://github.com/Red350/Solar_system_experiment) in the first few weeks of the module, which consisted of a solar system simulation that could be sped up, slowed down, and even reversed. I ended up starting completely from scratch with the actual assingnment, though I learned a lot from that which I applied to the current version.
 
 This UI is loosely inspired by Star Wars, mostly just the names and the idea of blowing up planets. It's intended to be part of a ship/deathstar, sort of a projection onto a window looking out into space, hence the static star background.
@@ -44,7 +44,7 @@ The rotation consists of arcs, all of which have a centre point at the centre of
 Star wars font - [STARWARS.TTF](http://www.fonts2u.com/starwars.font) by Jose Gonzalez Pareja
 
 ### Audio
-Background music - [deepspace.mp3](https://www.freesound.org/people/keinzweiter/sounds/161615/) by keinzweiter
-Background music - [space1.mp3](https://www.freesound.org/people/alaupas/sounds/176685/) by alaupas
-Button click - https://www.freesound.org/people/kwahmah_02/sounds/256116/
-Button mouse over - https://www.freesound.org/people/DrMinky/sounds/166186/
+* Background music - [deepspace.mp3](https://www.freesound.org/people/keinzweiter/sounds/161615/) by keinzweiter
+* Background music - [space1.mp3](https://www.freesound.org/people/alaupas/sounds/176685/) by alaupas
+* Button click - https://www.freesound.org/people/kwahmah_02/sounds/256116/ by kwahmah_02
+* Button mouse over - https://www.freesound.org/people/DrMinky/sounds/166186/ by DrMinky
