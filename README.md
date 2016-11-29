@@ -7,9 +7,13 @@ Student Number: C15755659
 [![Video](http://img.youtube.com/vi/DzMRd3_q96k/0.jpg)](http://www.youtube.com/watch?v=DzMRd3_q96k)
 
 ## Screenshots
+### System view
 ![System](screenshots/system.png)
+### Large planet view
 ![Large](screenshots/largeplanet.png)
+### Exploding planet
 ![Explode](screenshots/explode.png)
+### System post-purge
 ![Purged System](screenshots/purged_system.png)
 
 ## Description
@@ -37,7 +41,7 @@ I wrote a colour handler class that can be used to set the rgb or alpha of a col
 Each screen has an associated ColorHandler array that stores any colour used for that screen. When fading, there are two other arrays, fadeIn and fadeOut, which unsurprisingly point to the respective arrays to be faded in and out.
 
 ### Sun
--Using sin waves
+The sun in the centre of the system view consists of a circle, surrounded by 150 "satellite" circles. Each satellite remains at a static angle relative to the centre point of the sun. A numPeaks variable sets how many peaks the satellites have, and rotationSpeed determines how fast the wave appears to be turning, but in reality all the satellites remain on a straight line from the centre.
 
 ### Large planet
 The large planet view is intended to give the illusion of a 3d rotating planet, using only 2d drawing.
@@ -47,7 +51,7 @@ The rotation consists of arcs, all of which have a centre point at the centre of
 ## Asset Credits
 
 ### Font
-Star wars font - [STARWARS.TTF](http://www.fonts2u.com/starwars.font) by Jose Gonzalez Pareja
+* Star wars font - [STARWARS.TTF](http://www.fonts2u.com/starwars.font) by Jose Gonzalez Pareja
 
 ### Audio
 * Background music - [deepspace.mp3](https://www.freesound.org/people/keinzweiter/sounds/161615/) by keinzweiter

@@ -1,6 +1,7 @@
 /* Stars randomly change their brightness every 5 frames
  * to give the illusion that they are flickering.
  */
+ 
 class Star
 {
   PVector pos;

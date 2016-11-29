@@ -1,7 +1,16 @@
-/*  OOP Assignment: Sci-fi UI
-    Pádraig Redmond 
-    C15755659
-*/
+/* OOP Assignment: Sci-fi UI
+ * Name: Pádraig Redmond 
+ * Student number: C15755659
+ *
+ * This is intended to be a computer system on the death star, with the screen
+ * being a window out to space, which is why there are always stars visible in
+ * the background.
+ *
+ * After a text intro, a system view appears, where you can click on any planet
+ * to open a larger planet view. From this view you can "purge" the current planet.
+ * Returning to the system view shows the updated state of the planets, and from here
+ * you can log out of the system.
+ */
 
 import processing.sound.*;
 
@@ -384,4 +393,9 @@ void drawStars()
   {
     s.render();
   }
+}
+
+void initialiseColors()
+{
+  
 }

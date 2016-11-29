@@ -1,4 +1,5 @@
 /* Button to "Log out" */
+
 class QuitButton extends Button
 {
   

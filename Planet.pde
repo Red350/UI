@@ -2,7 +2,12 @@
  * There are two render methods in this class, one for 
  * when the planet is part of the system view and another
  * for when it's being viewed on its own.
+ *
+ * If a planet is purged, it's system view will consist of
+ * a red X where it was purged, and a dotted outline of its
+ * predicted trajectory were it still alive.
  */
+ 
 class Planet
 {
   String name;

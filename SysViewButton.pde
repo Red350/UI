@@ -1,4 +1,5 @@
 /* Button to returns to system view from large planet view */
+
 class SysViewButton extends Button
 {
   SysViewButton(int x, int y, int w, int h, String text, ColorHandler ch)

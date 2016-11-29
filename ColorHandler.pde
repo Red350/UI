@@ -6,6 +6,7 @@
  * must be cleared using logical AND, then written with the new value by bit shifting it and
  * storing it with logical OR.
  */
+ 
 class ColorHandler
 {
   color c;

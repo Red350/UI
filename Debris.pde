@@ -1,3 +1,5 @@
+/* Represents a single piece of debris after a planet is purged */
+
 class Debris
 {
   PVector pos;
