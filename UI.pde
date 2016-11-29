@@ -29,7 +29,7 @@ boolean pausePlanets = false;
 ArrayList<Planet> planets;  
 Planet clickedPlanet;
 Sun sun;
-ArrayList<Star> stars;
+Star stars[];
 
 // Buttons
 SysViewButton sysViewButton;
@@ -91,11 +91,10 @@ void setup()
   
   sun = new Sun(centreX, centreY);
   
-  stars = new ArrayList<Star>();
+  stars = new Star[1000];
   for(int i = 0; i < 1000; i++)
   {
-    Star s = new Star((int)random(width), (int)random(height), 0,0,1);
-    stars.add(s);
+    stars[i] = new Star((int)random(width), (int)random(height), 0,0,1);
   }
   
   initialiseColors();
